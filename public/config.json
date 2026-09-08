@@ -1,0 +1,659 @@
+{
+  "brand": {
+    "name": "VeriBlue",
+    "tagline": {
+      "en": "Verification · Recovery · Reputation",
+      "ru": "Верификация · Восстановление · Репутация"
+    }
+  },
+  "contacts": {
+    "email": "hello@veriblue.example",
+    "telegram": "@veriblue_support",
+    "telegramUrl": "https://t.me/veriblue_support"
+  },
+  "stats": [
+    {
+      "value": "250+",
+      "label": {
+        "en": "new accounts verified",
+        "ru": "новых аккаунтов верифицировано"
+      }
+    },
+    {
+      "value": "60+",
+      "label": {
+        "en": "existing accounts verified",
+        "ru": "действующих аккаунтов верифицировано"
+      }
+    },
+    {
+      "value": "15+",
+      "label": {
+        "en": "accounts recovered",
+        "ru": "аккаунтов восстановлено"
+      }
+    },
+    {
+      "value": "25+",
+      "label": {
+        "en": "harmful accounts removed",
+        "ru": "нарушающих аккаунтов заблокировано"
+      }
+    }
+  ],
+  "services": [
+    {
+      "id": "instagram-existing-personal",
+      "platform": "instagram",
+      "category": "verification",
+      "featured": true,
+      "title": {
+        "en": "Instagram · Existing personal account",
+        "ru": "Instagram · Действующий личный аккаунт"
+      },
+      "description": {
+        "en": "Meta Verified assistance for your current personal profile while preserving username, audience and content.",
+        "ru": "Помощь с подключением Meta Verified на действующий личный профиль с сохранением username, аудитории и контента."
+      },
+      "price": 40000,
+      "oldPrice": 60000,
+      "currency": "RUB",
+      "priceNote": {
+        "en": "Special terms apply with a video review and story mention after completion.",
+        "ru": "Специальная цена действует при видеоотзыве и отметке в сторис после выполнения."
+      },
+      "duration": {
+        "en": "15–40 days",
+        "ru": "15–40 дней"
+      },
+      "features": {
+        "en": [
+          "Keep your current profile and audience",
+          "Verification in Instagram and connected Threads profile",
+          "Enhanced platform support",
+          "Impersonation protection"
+        ],
+        "ru": [
+          "Сохранение текущего профиля и аудитории",
+          "Верификация Instagram и связанного Threads",
+          "Расширенная поддержка платформы",
+          "Защита от имперсонации"
+        ]
+      }
+    },
+    {
+      "id": "instagram-existing-business",
+      "platform": "instagram",
+      "category": "verification",
+      "title": {
+        "en": "Instagram · Existing business account",
+        "ru": "Instagram · Действующий бизнес-аккаунт"
+      },
+      "description": {
+        "en": "Business verification route for an established commercial profile without rebuilding the page from scratch.",
+        "ru": "Сценарий бизнес-верификации для действующей коммерческой страницы без создания нового профиля с нуля."
+      },
+      "price": null,
+      "currency": "RUB",
+      "priceLabel": {
+        "en": "On request",
+        "ru": "По запросу"
+      },
+      "priceNote": {
+        "en": "Final price depends on the account and working format.",
+        "ru": "Итоговая стоимость зависит от аккаунта и формата работы."
+      },
+      "duration": {
+        "en": "15–40 days",
+        "ru": "15–40 дней"
+      },
+      "features": {
+        "en": [
+          "Keep username, followers and content",
+          "Business verification route",
+          "Enhanced platform support",
+          "Optional work without logging out of the account"
+        ],
+        "ru": [
+          "Сохранение username, подписчиков и контента",
+          "Бизнес-формат верификации",
+          "Расширенная поддержка платформы",
+          "Возможность работы без выхода из аккаунта"
+        ]
+      }
+    },
+    {
+      "id": "instagram-self-guide",
+      "platform": "instagram",
+      "category": "consulting",
+      "title": {
+        "en": "Instagram · Self-service verification guide",
+        "ru": "Instagram · Самостоятельная верификация"
+      },
+      "description": {
+        "en": "Account analysis and a step-by-step route for opening Meta Verified and completing verification independently.",
+        "ru": "Анализ аккаунта и пошаговый сценарий для открытия Meta Verified и самостоятельного прохождения верификации."
+      },
+      "price": 3900,
+      "currency": "RUB",
+      "priceNote": {
+        "en": "Digital guide with personal recommendations.",
+        "ru": "Цифровая инструкция с персональными рекомендациями."
+      },
+      "duration": {
+        "en": "Digital format",
+        "ru": "Цифровой формат"
+      },
+      "features": {
+        "en": [
+          "Profile analysis",
+          "Step-by-step instructions",
+          "Personal profile recommendations",
+          "Waitlist opening recommendations"
+        ],
+        "ru": [
+          "Анализ страницы",
+          "Пошаговая инструкция",
+          "Персональные рекомендации",
+          "Рекомендации по выходу из списка ожидания"
+        ]
+      }
+    },
+    {
+      "id": "instagram-new-personal",
+      "platform": "instagram",
+      "category": "verification",
+      "featured": true,
+      "title": {
+        "en": "Instagram · New personal account",
+        "ru": "Instagram · Новый личный аккаунт"
+      },
+      "description": {
+        "en": "A new Instagram profile created for your identity and prepared with Meta Verified status.",
+        "ru": "Создание нового Instagram-профиля на ваши данные с подключением Meta Verified."
+      },
+      "price": 8500,
+      "oldPrice": 10000,
+      "currency": "RUB",
+      "priceNote": {
+        "en": "Special terms apply with a video review and story mention after completion.",
+        "ru": "Специальная цена действует при видеоотзыве и отметке в сторис после выполнения."
+      },
+      "duration": {
+        "en": "1–24 hours",
+        "ru": "1–24 часа"
+      },
+      "features": {
+        "en": [
+          "New profile setup",
+          "Instagram and Threads verification",
+          "Enhanced platform support",
+          "Impersonation protection"
+        ],
+        "ru": [
+          "Создание нового профиля",
+          "Галочка в Instagram и Threads",
+          "Расширенная поддержка платформы",
+          "Защита от имперсонации"
+        ]
+      }
+    },
+    {
+      "id": "instagram-new-business",
+      "platform": "instagram",
+      "category": "verification",
+      "title": {
+        "en": "Instagram · New business profile",
+        "ru": "Instagram · Новый бизнес-профиль"
+      },
+      "description": {
+        "en": "A new Instagram profile created for a company, store or brand and prepared for verified business status.",
+        "ru": "Создание нового Instagram-профиля для компании, магазина или бренда с подготовкой к бизнес-верификации."
+      },
+      "price": 20000,
+      "currency": "RUB",
+      "priceNote": {
+        "en": "50% prepayment according to the source price terms.",
+        "ru": "Предоплата 50% согласно условиям исходного прайса."
+      },
+      "duration": {
+        "en": "3 hours–2 days",
+        "ru": "от 3 часов до 2 дней"
+      },
+      "features": {
+        "en": [
+          "Business profile setup",
+          "Brand-oriented profile format",
+          "Enhanced platform support",
+          "Impersonation protection"
+        ],
+        "ru": [
+          "Создание бизнес-профиля",
+          "Оформление под бренд",
+          "Расширенная поддержка платформы",
+          "Защита от имперсонации"
+        ]
+      }
+    },
+    {
+      "id": "instagram-pseudonym",
+      "platform": "instagram",
+      "category": "verification",
+      "title": {
+        "en": "Instagram · Pseudonym / digital persona",
+        "ru": "Instagram · Псевдоним / цифровая личность"
+      },
+      "description": {
+        "en": "A new verified profile built around a pseudonym or digital persona for creative and media projects.",
+        "ru": "Создание нового верифицированного профиля под псевдоним или цифровую личность для творческих и медиа-проектов."
+      },
+      "price": 12000,
+      "oldPrice": 15000,
+      "currency": "RUB",
+      "priceNote": {
+        "en": "Special terms apply with a video review and story mention after completion.",
+        "ru": "Специальная цена действует при видеоотзыве и отметке в сторис после выполнения."
+      },
+      "duration": {
+        "en": "1–3 days",
+        "ru": "1–3 дня"
+      },
+      "features": {
+        "en": [
+          "Profile under a chosen pseudonym",
+          "Instagram and Threads verification",
+          "Enhanced platform support",
+          "Flexible profile presentation"
+        ],
+        "ru": [
+          "Профиль под выбранный псевдоним",
+          "Галочка в Instagram и Threads",
+          "Расширенная поддержка платформы",
+          "Гибкое оформление профиля"
+        ]
+      }
+    },
+    {
+      "id": "facebook-existing",
+      "platform": "facebook",
+      "category": "verification",
+      "featured": true,
+      "title": {
+        "en": "Facebook · Existing account",
+        "ru": "Facebook · Действующий аккаунт"
+      },
+      "description": {
+        "en": "Meta Verified assistance for an existing Facebook profile while preserving the account, audience and published content.",
+        "ru": "Помощь с Meta Verified для действующего Facebook-профиля с сохранением аккаунта, аудитории и публикаций."
+      },
+      "price": 30000,
+      "oldPrice": 40000,
+      "currency": "RUB",
+      "priceNote": {
+        "en": "Special terms apply with a video review and story mention after completion.",
+        "ru": "Специальная цена действует при видеоотзыве и отметке в сторис после выполнения."
+      },
+      "duration": {
+        "en": "7–30 days",
+        "ru": "7–30 дней"
+      },
+      "features": {
+        "en": [
+          "Keep the current profile",
+          "Verified status",
+          "Enhanced platform support",
+          "Impersonation protection"
+        ],
+        "ru": [
+          "Сохранение текущего профиля",
+          "Подтверждённый статус",
+          "Расширенная поддержка платформы",
+          "Защита от имперсонации"
+        ]
+      }
+    },
+    {
+      "id": "facebook-new",
+      "platform": "facebook",
+      "category": "verification",
+      "title": {
+        "en": "Facebook · New personal profile",
+        "ru": "Facebook · Новый личный профиль"
+      },
+      "description": {
+        "en": "A new Facebook profile created for your identity and prepared with Meta Verified status.",
+        "ru": "Создание нового Facebook-профиля на ваши данные с подключением Meta Verified."
+      },
+      "price": 12000,
+      "oldPrice": 15000,
+      "currency": "RUB",
+      "priceNote": {
+        "en": "Special terms apply with a video review and story mention after completion.",
+        "ru": "Специальная цена действует при видеоотзыве и отметке в сторис после выполнения."
+      },
+      "duration": {
+        "en": "1–24 hours",
+        "ru": "1–24 часа"
+      },
+      "features": {
+        "en": [
+          "New profile setup",
+          "Verified status",
+          "Enhanced platform support",
+          "Profile configuration"
+        ],
+        "ru": [
+          "Создание нового профиля",
+          "Подтверждённый статус",
+          "Расширенная поддержка платформы",
+          "Настройка профиля"
+        ]
+      }
+    },
+    {
+      "id": "x-existing",
+      "platform": "x",
+      "category": "verification",
+      "featured": true,
+      "title": {
+        "en": "X · Existing account",
+        "ru": "X · Действующий аккаунт"
+      },
+      "description": {
+        "en": "X Premium verification assistance for your current account with username, profile name and avatar preserved.",
+        "ru": "Подключение X Premium для действующего аккаунта с сохранением username, имени профиля и аватара."
+      },
+      "price": 14000,
+      "currency": "RUB",
+      "duration": {
+        "en": "1–3 days",
+        "ru": "1–3 дня"
+      },
+      "features": {
+        "en": [
+          "Verification badge",
+          "Reply priority features",
+          "Extended post and editing features",
+          "Access to eligible Premium features"
+        ],
+        "ru": [
+          "Синяя галочка",
+          "Приоритет ответов",
+          "Расширенные публикации и редактирование",
+          "Доступ к доступным функциям Premium"
+        ]
+      }
+    },
+    {
+      "id": "x-new",
+      "platform": "x",
+      "category": "verification",
+      "title": {
+        "en": "X · New account",
+        "ru": "X · Новый аккаунт"
+      },
+      "description": {
+        "en": "A new X profile created from scratch and prepared with X Premium verification.",
+        "ru": "Создание нового профиля X с нуля и подключением X Premium."
+      },
+      "price": 8000,
+      "currency": "RUB",
+      "duration": {
+        "en": "1–2 days",
+        "ru": "1–2 дня"
+      },
+      "features": {
+        "en": [
+          "Custom username",
+          "Custom profile name and avatar",
+          "Verification badge",
+          "Eligible Premium features"
+        ],
+        "ru": [
+          "Username на выбор",
+          "Имя и аватар на выбор",
+          "Синяя галочка",
+          "Доступные функции Premium"
+        ]
+      }
+    },
+    {
+      "id": "recovery-pre-appeal",
+      "platform": "instagram",
+      "category": "recovery",
+      "featured": true,
+      "title": {
+        "en": "Instagram recovery · Appeal still available",
+        "ru": "Разблокировка Instagram · Апелляция ещё доступна"
+      },
+      "description": {
+        "en": "For blocked accounts where the appeal option is still active and the platform has not issued a final decision.",
+        "ru": "Для заблокированных аккаунтов, где кнопка апелляции ещё активна и окончательное решение платформы не принято."
+      },
+      "price": 25000,
+      "currency": "RUB",
+      "duration": {
+        "en": "3–7 days",
+        "ru": "3–7 дней"
+      },
+      "features": {
+        "en": [
+          "Block type diagnostics",
+          "Appeal position preparation",
+          "Submission support",
+          "Case follow-up"
+        ],
+        "ru": [
+          "Диагностика типа блокировки",
+          "Подготовка позиции",
+          "Сопровождение обращения",
+          "Контроль кейса"
+        ]
+      }
+    },
+    {
+      "id": "recovery-post-appeal",
+      "platform": "instagram",
+      "category": "recovery",
+      "title": {
+        "en": "Instagram recovery · Appeal rejected",
+        "ru": "Разблокировка Instagram · Апелляция отклонена"
+      },
+      "description": {
+        "en": "For permanently disabled accounts where the standard appeal has already been rejected or is no longer available.",
+        "ru": "Для окончательно отключённых аккаунтов, где стандартная апелляция уже отклонена или больше недоступна."
+      },
+      "price": null,
+      "currency": "RUB",
+      "priceLabel": {
+        "en": "On request",
+        "ru": "По запросу"
+      },
+      "priceNote": {
+        "en": "Price is determined after diagnostics.",
+        "ru": "Стоимость определяется после диагностики."
+      },
+      "duration": {
+        "en": "7–30 days",
+        "ru": "7–30 дней"
+      },
+      "features": {
+        "en": [
+          "Detailed case diagnostics",
+          "Recovery route assessment",
+          "Evidence preparation",
+          "Escalation support"
+        ],
+        "ru": [
+          "Подробная диагностика кейса",
+          "Оценка маршрута восстановления",
+          "Подготовка материалов",
+          "Сопровождение эскалации"
+        ]
+      }
+    },
+    {
+      "id": "reputation-removal",
+      "platform": "multi",
+      "category": "reputation",
+      "title": {
+        "en": "Reputation protection · Harmful account removal",
+        "ru": "Защита репутации · Блокировка нарушающих аккаунтов"
+      },
+      "description": {
+        "en": "Case support for impersonation, fraud, phishing, defamation, threats, harassment, doxxing or unauthorized use of a brand and content.",
+        "ru": "Сопровождение кейсов с имперсонацией, мошенничеством, фишингом, клеветой, угрозами, травлей, доксингом и незаконным использованием бренда или контента."
+      },
+      "price": null,
+      "currency": "RUB",
+      "priceLabel": {
+        "en": "On request",
+        "ru": "По запросу"
+      },
+      "priceNote": {
+        "en": "Cases are accepted after checking the grounds and available evidence.",
+        "ru": "Кейс принимается после проверки оснований и доступных доказательств."
+      },
+      "duration": {
+        "en": "7–30 days",
+        "ru": "7–30 дней"
+      },
+      "features": {
+        "en": [
+          "Policy and grounds review",
+          "Evidence collection",
+          "Complaint and escalation support",
+          "Case tracking through the platform decision"
+        ],
+        "ru": [
+          "Проверка оснований по правилам площадки",
+          "Сбор доказательств",
+          "Жалобы и эскалации",
+          "Сопровождение до решения платформы"
+        ]
+      }
+    }
+  ],
+  "faq": [
+    {
+      "question": {
+        "en": "Do I need a large audience to get verified?",
+        "ru": "Нужно ли много подписчиков для синей галочки?"
+      },
+      "answer": {
+        "en": "There is no fixed minimum follower count. Account status, identity information and eligibility under the platform rules matter more than audience size.",
+        "ru": "Фиксированного минимального количества подписчиков нет. Важнее состояние аккаунта, корректность данных и соответствие требованиям платформы."
+      }
+    },
+    {
+      "question": {
+        "en": "Can I keep my current username, followers and content?",
+        "ru": "Можно сохранить текущий username, подписчиков и контент?"
+      },
+      "answer": {
+        "en": "For existing-account formats, that is the goal. The exact route and any temporary profile requirements are confirmed after the account review.",
+        "ru": "Для форматов на действующий аккаунт это основной сценарий. Конкретные требования и возможные временные изменения подтверждаются после проверки профиля."
+      }
+    },
+    {
+      "question": {
+        "en": "Is Meta Verified or X Premium paid monthly?",
+        "ru": "Нужно ли оплачивать Meta Verified или X Premium каждый месяц?"
+      },
+      "answer": {
+        "en": "Yes. These are platform subscription products. The platform subscription fee is separate from the service fee and is governed by the platform terms.",
+        "ru": "Да. Это подписочные продукты самих платформ. Стоимость подписки оплачивается отдельно от услуги и регулируется условиями соответствующей платформы."
+      }
+    },
+    {
+      "question": {
+        "en": "What is the difference between personal and business verification?",
+        "ru": "Чем личная верификация отличается от бизнес-верификации?"
+      },
+      "answer": {
+        "en": "Personal verification is linked to an individual identity. Business verification is linked to a company, brand or commercial profile and follows a different eligibility route.",
+        "ru": "Личная верификация привязана к конкретному человеку. Бизнес-верификация относится к компании, бренду или коммерческой странице и проходит по другому сценарию."
+      }
+    },
+    {
+      "question": {
+        "en": "What is the difference between the guide and full-service work?",
+        "ru": "Чем инструкция отличается от работы под ключ?"
+      },
+      "answer": {
+        "en": "The guide gives you an account analysis, recommendations and a step-by-step route, while you perform the actions yourself. Full-service work includes direct case support through the agreed process.",
+        "ru": "Инструкция включает анализ, рекомендации и пошаговый сценарий, но действия вы выполняете самостоятельно. При работе под ключ команда сопровождает кейс в рамках согласованного процесса."
+      }
+    },
+    {
+      "question": {
+        "en": "Can a blocked Instagram account be recovered?",
+        "ru": "Можно ли восстановить заблокированный Instagram-аккаунт?"
+      },
+      "answer": {
+        "en": "Sometimes. The route depends on the block type, appeal history, account status and available evidence. A diagnostic review is required before any realistic assessment can be made.",
+        "ru": "Иногда да. Всё зависит от типа блокировки, истории апелляций, состояния аккаунта и доступных доказательств. До оценки результата требуется диагностика."
+      }
+    },
+    {
+      "question": {
+        "en": "What kinds of harmful accounts can be reviewed for removal?",
+        "ru": "Какие нарушающие аккаунты можно взять на блокировку?"
+      },
+      "answer": {
+        "en": "Typical cases include impersonation, fraud, phishing, defamation, threats, harassment, publication of personal data and unauthorized use of a name, brand or copyrighted content. A valid platform-policy basis is required.",
+        "ru": "Типичные случаи: имперсонация, мошенничество, фишинг, клевета, угрозы, травля, публикация персональных данных и незаконное использование имени, бренда или контента. Нужны подтверждаемые основания по правилам платформы."
+      }
+    },
+    {
+      "question": {
+        "en": "Do you need my password to review the case?",
+        "ru": "Нужен ли пароль от аккаунта для первичной оценки?"
+      },
+      "answer": {
+        "en": "No password is required for the initial request. Start with the public account link and a description of the situation. Any further access requirements should be discussed separately and only when necessary.",
+        "ru": "Для первичной заявки пароль не нужен. Достаточно ссылки на аккаунт и описания ситуации. Любые дальнейшие вопросы доступа должны обсуждаться отдельно и только при необходимости."
+      }
+    },
+    {
+      "question": {
+        "en": "Do you take card payment on the website?",
+        "ru": "Можно оплатить услугу банковской картой на сайте?"
+      },
+      "answer": {
+        "en": "No. The website does not collect payment or card data. It only sends a structured request to the team. Commercial terms are discussed directly after the case review.",
+        "ru": "Нет. Сайт не собирает платёжные данные и данные карты. Он только отправляет структурированную заявку команде. Коммерческие условия обсуждаются напрямую после оценки кейса."
+      }
+    },
+    {
+      "question": {
+        "en": "What happens after I submit a request?",
+        "ru": "Что происходит после отправки заявки?"
+      },
+      "answer": {
+        "en": "The request is delivered to the team in Telegram with the selected services, contact details, account links and case description. The team reviews the information and contacts you directly.",
+        "ru": "Заявка приходит команде в Telegram с выбранными услугами, контактом, ссылками на аккаунты и описанием ситуации. После проверки информации команда связывается с вами напрямую."
+      }
+    },
+    {
+      "question": {
+        "en": "Can I select several services in one request?",
+        "ru": "Можно выбрать несколько услуг в одной заявке?"
+      },
+      "answer": {
+        "en": "Yes. This is useful when several accounts or tasks are connected. You can select multiple services and add more than one account link.",
+        "ru": "Да. Это удобно, когда связаны несколько аккаунтов или задач. Можно выбрать несколько услуг и добавить несколько ссылок на аккаунты."
+      }
+    },
+    {
+      "question": {
+        "en": "Are verification results guaranteed?",
+        "ru": "Можно ли гарантировать результат верификации?"
+      },
+      "answer": {
+        "en": "Platform eligibility and final decisions remain under the control of the platform. The team should confirm the specific commercial terms and any result commitments only after reviewing the account.",
+        "ru": "Критерии доступности и финальные решения остаются за платформой. Конкретные коммерческие условия и обязательства по результату должны подтверждаться только после проверки аккаунта."
+      }
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+node_modules
+dist
+server/server-config.json
+.DS_Store
+.idea

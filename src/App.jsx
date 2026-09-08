@@ -1,0 +1,555 @@
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { ArrowRight, BadgeCheck, Check, ChevronDown, Globe2, Instagram, Mail, Menu, Moon, Plus, Send, ShieldCheck, Sparkles, Sun, X } from 'lucide-react'
+
+const Text = (Value, Language) => Value?.[Language] ?? Value?.en ?? ''
+
+const Translations = {
+  en: {
+    navServices: 'Services',
+    navAbout: 'Why us',
+    navProcess: 'Process',
+    navFaq: 'FAQ',
+    navContact: 'Contact',
+    heroKicker: 'Verification · Recovery · Reputation',
+    heroTitleA: 'A verified presence',
+    heroTitleB: 'people can trust.',
+    heroText: 'Verification assistance for Instagram, Facebook and X, account recovery and digital reputation protection. We review each case before work begins and explain the route, timing and terms in advance.',
+    heroPrimary: 'View services',
+    heroSecondary: 'Get a case review',
+    noPayment: 'No card data collected',
+    humanSupport: 'Direct team support',
+    existingNew: 'Existing & new accounts',
+    servicesKicker: 'Services & pricing',
+    servicesTitle: 'Choose the right format for your case.',
+    servicesText: 'Select one or several services. The final route depends on the account type, current status and platform eligibility.',
+    all: 'All',
+    instagram: 'Instagram',
+    facebook: 'Facebook',
+    x: 'X / Twitter',
+    recovery: 'Recovery',
+    reputation: 'Reputation',
+    security: 'Security',
+    consulting: 'Guides',
+    featured: 'Popular',
+    select: 'Add service',
+    selected: 'Added',
+    serviceRequest: 'Start request',
+    duration: 'Timing',
+    requestCount: 'selected',
+    openRequest: 'Continue request',
+    aboutKicker: 'Why clients choose us',
+    aboutTitle: 'A clear process before any commitment.',
+    aboutText: 'We do not force every account into the same scenario. First we assess the profile and task, then explain what can realistically be done.',
+    about1Title: 'Individual assessment',
+    about1Text: 'Account status, verification eligibility, previous appeals and risks are reviewed before the work format is confirmed.',
+    about2Title: 'Transparent terms',
+    about2Text: 'You receive the expected route, timing and commercial terms before the case moves forward.',
+    about3Title: 'Support through completion',
+    about3Text: 'The team stays in touch during the process and explains the next steps after the result is received.',
+    statsKicker: 'Experience',
+    statsTitle: 'Cases across verification, recovery and reputation.',
+    processKicker: 'How it works',
+    processTitle: 'From request to result in four clear steps.',
+    processText: 'The website does not process payments. It collects the information needed for a proper case review and sends it directly to the team.',
+    step1Title: 'Send the case',
+    step1Text: 'Choose services, add account links and describe the task.',
+    step2Title: 'Initial review',
+    step2Text: 'We evaluate account status, available route, expected timing and risks.',
+    step3Title: 'Confirm terms',
+    step3Text: 'The team contacts you directly and agrees the final format before work begins.',
+    step4Title: 'Execution & support',
+    step4Text: 'We keep you updated during the process and provide next-step guidance after completion.',
+    faqKicker: 'FAQ',
+    faqTitle: 'Important questions before you start.',
+    faqText: 'Answers about verification formats, subscriptions, account recovery, safety and the request process.',
+    contactKicker: 'Case review',
+    contactTitle: 'Not sure which service fits your situation?',
+    contactText: 'Send a structured request with your account link and a short description. The team will review the case and contact you directly.',
+    requestTitle: 'Request a case review',
+    requestText: 'Select services, add account links and tell us how urgent the task is.',
+    name: 'Name',
+    namePlaceholder: 'How should we address you?',
+    contact: 'Contact',
+    contactPlaceholder: '@telegram, email or phone',
+    clientType: 'Client type',
+    individual: 'Individual',
+    business: 'Business',
+    agency: 'Agency / partner',
+    urgency: 'Urgency',
+    normal: 'Standard',
+    urgent: 'Urgent',
+    flexible: 'No rush',
+    accountLinks: 'Account links',
+    accountPlaceholder: 'https://instagram.com/...',
+    addAccount: 'Add another account',
+    details: 'Case details',
+    detailsPlaceholder: 'Describe the current account status, the result you need and anything already attempted.',
+    servicesField: 'Services',
+    submit: 'Send request',
+    submitting: 'Sending...',
+    successTitle: 'Request received',
+    successText: 'The request has been delivered to the team in Telegram. We can now review the details and contact you using the information provided.',
+    errorTitle: 'Could not send request',
+    close: 'Close',
+    emptyServices: 'Select at least one service',
+    privacy: 'No payment or card data is collected on this website.',
+    disclaimer: 'VeriBlue is an independent service and is not affiliated with Meta Platforms, Instagram, Facebook or X Corp. Platform subscriptions and eligibility are governed by the respective platform terms.',
+    menu: 'Menu'
+  },
+  ru: {
+    navServices: 'Услуги',
+    navAbout: 'Почему мы',
+    navProcess: 'Как работаем',
+    navFaq: 'FAQ',
+    navContact: 'Контакты',
+    heroKicker: 'Верификация · Восстановление · Репутация',
+    heroTitleA: 'Подтверждённый статус,',
+    heroTitleB: 'которому доверяют.',
+    heroText: 'Помощь с верификацией Instagram, Facebook и X, восстановлением аккаунтов и защитой цифровой репутации. Каждый кейс сначала проверяем, а затем заранее объясняем возможный сценарий, сроки и условия.',
+    heroPrimary: 'Смотреть услуги',
+    heroSecondary: 'Получить оценку',
+    noPayment: 'Без сбора данных карты',
+    humanSupport: 'Прямая связь с командой',
+    existingNew: 'Новые и действующие аккаунты',
+    servicesKicker: 'Услуги и цены',
+    servicesTitle: 'Подберите формат под свою задачу.',
+    servicesText: 'Можно выбрать одну или несколько услуг. Итоговый сценарий зависит от типа аккаунта, его текущего состояния и требований платформы.',
+    all: 'Все',
+    instagram: 'Instagram',
+    facebook: 'Facebook',
+    x: 'X / Twitter',
+    recovery: 'Разблокировка',
+    reputation: 'Репутация',
+    security: 'Безопасность',
+    consulting: 'Инструкции',
+    featured: 'Популярное',
+    select: 'Добавить услугу',
+    selected: 'Добавлено',
+    serviceRequest: 'Оформить заявку',
+    duration: 'Срок',
+    requestCount: 'выбрано',
+    openRequest: 'Продолжить заявку',
+    aboutKicker: 'Почему обращаются к нам',
+    aboutTitle: 'Понятный сценарий до начала работы.',
+    aboutText: 'Мы не применяем один шаблон ко всем аккаунтам. Сначала изучаем профиль и задачу, затем объясняем, что реально можно сделать в конкретной ситуации.',
+    about1Title: 'Индивидуальная оценка',
+    about1Text: 'Проверяем состояние аккаунта, доступность верификации, историю апелляций и возможные риски до согласования формата работы.',
+    about2Title: 'Прозрачные условия',
+    about2Text: 'До старта вы знаете предполагаемый маршрут, сроки и коммерческие условия. Без сюрпризов в середине процесса.',
+    about3Title: 'Сопровождение до результата',
+    about3Text: 'Команда остаётся на связи в процессе и объясняет дальнейшие действия после завершения работы.',
+    statsKicker: 'Опыт',
+    statsTitle: 'Кейсы по верификации, восстановлению и защите репутации.',
+    processKicker: 'Как проходит работа',
+    processTitle: 'От заявки до результата за четыре понятных этапа.',
+    processText: 'Сайт не принимает оплату. Он собирает данные, необходимые для первичной оценки, и передаёт структурированную заявку напрямую команде.',
+    step1Title: 'Заявка',
+    step1Text: 'Выберите услуги, добавьте ссылки на аккаунты и кратко опишите задачу.',
+    step2Title: 'Первичная оценка',
+    step2Text: 'Проверяем состояние аккаунта, возможный сценарий, сроки и риски.',
+    step3Title: 'Согласование',
+    step3Text: 'Команда связывается с вами и фиксирует итоговый формат и условия до начала работы.',
+    step4Title: 'Работа и поддержка',
+    step4Text: 'Держим вас в курсе процесса и объясняем дальнейшие шаги после получения результата.',
+    faqKicker: 'Частые вопросы',
+    faqTitle: 'Что важно знать до начала работы.',
+    faqText: 'Короткие ответы о форматах верификации, подписках, восстановлении аккаунтов, безопасности и отправке заявки.',
+    contactKicker: 'Оценка кейса',
+    contactTitle: 'Не уверены, какая услуга подходит?',
+    contactText: 'Отправьте структурированную заявку со ссылкой на аккаунт и кратким описанием ситуации. Команда изучит кейс и свяжется с вами напрямую.',
+    requestTitle: 'Получить оценку кейса',
+    requestText: 'Выберите услуги, добавьте ссылки на аккаунты и укажите срочность.',
+    name: 'Имя',
+    namePlaceholder: 'Как к вам обращаться?',
+    contact: 'Контакт',
+    contactPlaceholder: '@telegram, email или телефон',
+    clientType: 'Тип клиента',
+    individual: 'Частное лицо',
+    business: 'Бизнес',
+    agency: 'Агентство / партнёр',
+    urgency: 'Срочность',
+    normal: 'Стандартно',
+    urgent: 'Срочно',
+    flexible: 'Не срочно',
+    accountLinks: 'Ссылки на аккаунты',
+    accountPlaceholder: 'https://instagram.com/...',
+    addAccount: 'Добавить ещё аккаунт',
+    details: 'Описание ситуации',
+    detailsPlaceholder: 'Опишите текущее состояние аккаунта, желаемый результат и что уже пробовали сделать.',
+    servicesField: 'Услуги',
+    submit: 'Отправить заявку',
+    submitting: 'Отправка...',
+    successTitle: 'Заявка получена',
+    successText: 'Заявка доставлена команде в Telegram. Теперь мы можем изучить детали и связаться с вами по указанному контакту.',
+    errorTitle: 'Не удалось отправить заявку',
+    close: 'Закрыть',
+    emptyServices: 'Выберите хотя бы одну услугу',
+    privacy: 'Платёжные данные и данные банковских карт на сайте не собираются.',
+    disclaimer: 'VeriBlue является независимым сервисом и не связан с Meta Platforms, Instagram, Facebook или X Corp. Подписки и критерии доступности определяются правилами соответствующих платформ.',
+    menu: 'Меню'
+  }
+}
+
+function App() {
+  const [Config, SetConfig] = useState(null)
+  const [Language, SetLanguage] = useState(() => localStorage.getItem('veriblue-language') || 'en')
+  const [Theme, SetTheme] = useState(() => localStorage.getItem('veriblue-theme') || 'dark')
+  const [Filter, SetFilter] = useState('all')
+  const [SelectedServiceIds, SetSelectedServiceIds] = useState([])
+  const [RequestOpen, SetRequestOpen] = useState(false)
+  const [MobileOpen, SetMobileOpen] = useState(false)
+  const [LanguageOpen, SetLanguageOpen] = useState(false)
+  const [FooterVisible, SetFooterVisible] = useState(false)
+  const FooterReference = useRef(null)
+  const LanguageReference = useRef(null)
+  const T = Translations[Language]
+
+  useEffect(() => {
+    fetch(`${import.meta.env.BASE_URL}config.json`).then(Response => Response.json()).then(SetConfig)
+  }, [])
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = Theme
+    localStorage.setItem('veriblue-theme', Theme)
+  }, [Theme])
+
+  useEffect(() => {
+    document.documentElement.lang = Language
+    localStorage.setItem('veriblue-language', Language)
+  }, [Language])
+
+  useEffect(() => {
+    const HandlePointerDown = Event => {
+      if (LanguageReference.current && !LanguageReference.current.contains(Event.target)) SetLanguageOpen(false)
+    }
+    document.addEventListener('pointerdown', HandlePointerDown)
+    return () => document.removeEventListener('pointerdown', HandlePointerDown)
+  }, [])
+
+  useEffect(() => {
+    if (!RequestOpen) return undefined
+    const ScrollbarWidth = window.innerWidth - document.documentElement.clientWidth
+    const PreviousOverflow = document.body.style.overflow
+    const PreviousPaddingRight = document.body.style.paddingRight
+    const PreviousOverscroll = document.body.style.overscrollBehavior
+    document.body.style.overflow = 'hidden'
+    document.body.style.overscrollBehavior = 'none'
+    if (ScrollbarWidth > 0) document.body.style.paddingRight = `${ScrollbarWidth}px`
+    return () => {
+      document.body.style.overflow = PreviousOverflow
+      document.body.style.paddingRight = PreviousPaddingRight
+      document.body.style.overscrollBehavior = PreviousOverscroll
+    }
+  }, [RequestOpen])
+
+  useEffect(() => {
+    if (!FooterReference.current) return undefined
+    const Observer = new IntersectionObserver(Entries => SetFooterVisible(Entries.some(Entry => Entry.isIntersecting)), { threshold: 0.05 })
+    Observer.observe(FooterReference.current)
+    return () => Observer.disconnect()
+  }, [Config])
+
+  const FilteredServices = useMemo(() => {
+    if (!Config) return []
+    if (Filter === 'all') return Config.services
+    return Config.services.filter(Service => Service.platform === Filter || Service.category === Filter)
+  }, [Config, Filter])
+
+  const ToggleService = ServiceId => {
+    SetSelectedServiceIds(CurrentIds => CurrentIds.includes(ServiceId)
+      ? CurrentIds.filter(CurrentId => CurrentId !== ServiceId)
+      : [...CurrentIds, ServiceId])
+  }
+
+  const OpenRequestWithService = ServiceId => {
+    SetSelectedServiceIds(CurrentIds => CurrentIds.includes(ServiceId) ? CurrentIds : [...CurrentIds, ServiceId])
+    SetRequestOpen(true)
+  }
+
+  if (!Config) return <div className="loadingScreen"><div className="loadingMark"><BadgeCheck size={28} /></div></div>
+
+  const Filters = [
+    ['all', T.all],
+    ['instagram', T.instagram],
+    ['facebook', T.facebook],
+    ['x', T.x],
+    ['recovery', T.recovery],
+    ['reputation', T.reputation],
+    ['consulting', T.consulting]
+  ]
+
+  const AboutItems = [
+    [ShieldCheck, T.about1Title, T.about1Text],
+    [BadgeCheck, T.about2Title, T.about2Text],
+    [Send, T.about3Title, T.about3Text]
+  ]
+
+  return (
+    <>
+      <header className="siteHeader">
+        <div className="container headerInner">
+          <a className="brand" href="#top">
+            <span className="brandMark"><BadgeCheck size={20} /></span>
+            <span>{Config.brand.name}</span>
+          </a>
+          <nav className={`navLinks ${MobileOpen ? 'navLinksOpen' : ''}`}>
+            <a href="#services" onClick={() => SetMobileOpen(false)}>{T.navServices}</a>
+            <a href="#about" onClick={() => SetMobileOpen(false)}>{T.navAbout}</a>
+            <a href="#process" onClick={() => SetMobileOpen(false)}>{T.navProcess}</a>
+            <a href="#faq" onClick={() => SetMobileOpen(false)}>{T.navFaq}</a>
+            <a href="#contact" onClick={() => SetMobileOpen(false)}>{T.navContact}</a>
+          </nav>
+          <div className="headerControls">
+            <div className="languagePicker" ref={LanguageReference}>
+              <button className={`controlButton languageButton ${LanguageOpen ? 'active' : ''}`} onClick={() => SetLanguageOpen(!LanguageOpen)} aria-haspopup="menu" aria-expanded={LanguageOpen}><Globe2 size={16} /><span>{Language.toUpperCase()}</span><ChevronDown size={14} /></button>
+              {LanguageOpen && <div className="languageMenu" role="menu">
+                <button className={Language === 'en' ? 'active' : ''} onClick={() => { SetLanguage('en'); SetLanguageOpen(false) }}><span>EN</span><b>English</b>{Language === 'en' && <Check size={15} />}</button>
+                <button className={Language === 'ru' ? 'active' : ''} onClick={() => { SetLanguage('ru'); SetLanguageOpen(false) }}><span>RU</span><b>Русский</b>{Language === 'ru' && <Check size={15} />}</button>
+              </div>}
+            </div>
+            <button className="controlButton themeButton" onClick={() => SetTheme(Theme === 'dark' ? 'light' : 'dark')} aria-label="Toggle theme">{Theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}</button>
+            <button className="button buttonPrimary headerRequest" onClick={() => SetRequestOpen(true)}>{T.heroSecondary}</button>
+            <button className="controlButton menuButton" onClick={() => SetMobileOpen(!MobileOpen)} aria-label={T.menu}>{MobileOpen ? <X size={18} /> : <Menu size={18} />}</button>
+          </div>
+        </div>
+      </header>
+
+      <main id="top">
+        <section className="heroSection">
+          <div className="heroGlow heroGlowOne" />
+          <div className="heroGlow heroGlowTwo" />
+          <div className="container heroGrid">
+            <div className="heroCopy">
+              <span className="heroKicker"><Sparkles size={15} />{T.heroKicker}</span>
+              <h1>{T.heroTitleA}<span>{T.heroTitleB}</span></h1>
+              <p>{T.heroText}</p>
+              <div className="heroActions">
+                <a className="button buttonPrimary buttonLarge" href="#services">{T.heroPrimary}<ArrowRight size={18} /></a>
+                <button className="button buttonGhost buttonLarge" onClick={() => SetRequestOpen(true)}>{T.heroSecondary}</button>
+              </div>
+              <div className="trustStrip">
+                <span><Check size={15} />{T.noPayment}</span>
+                <span><Check size={15} />{T.humanSupport}</span>
+                <span><Check size={15} />{T.existingNew}</span>
+              </div>
+            </div>
+            <div className="heroVisual" aria-hidden="true">
+              <div className="visualOrbit orbitOne" />
+              <div className="visualOrbit orbitTwo" />
+              <div className="profileCard">
+                <div className="profileTop"><span className="miniDots"><i /><i /><i /></span><span>verified profile</span></div>
+                <div className="profileAvatar"><Instagram size={34} /></div>
+                <div className="profileName"><b>@official.profile</b><BadgeCheck size={18} /></div>
+                <div className="profileLine wide" /><div className="profileLine" /><div className="profileLine short" />
+                <div className="profileStats"><span><b>24.8K</b> followers</span><span><b>Verified</b> status</span></div>
+              </div>
+              <div className="statusCard"><span className="statusIcon"><ShieldCheck size={21} /></span><div><b>Identity protected</b><small>Verified profile status</small></div><Check size={18} /></div>
+              <div className="floatingBadge"><BadgeCheck size={19} />Verified</div>
+            </div>
+          </div>
+        </section>
+
+        <section id="services" className="servicesSection">
+          <div className="container">
+            <SectionHeading kicker={T.servicesKicker} title={T.servicesTitle} text={T.servicesText} />
+            <div className="filterBar">{Filters.map(([FilterId, Label]) => <button key={FilterId} className={Filter === FilterId ? 'active' : ''} onClick={() => SetFilter(FilterId)}>{Label}</button>)}</div>
+            <div className="serviceGrid">
+              {FilteredServices.map(Service => <ServiceCard key={Service.id} service={Service} language={Language} t={T} selected={SelectedServiceIds.includes(Service.id)} onToggle={() => ToggleService(Service.id)} onOpen={() => OpenRequestWithService(Service.id)} />)}
+            </div>
+          </div>
+        </section>
+
+        <section id="about" className="aboutSection">
+          <div className="container">
+            <SectionHeading kicker={T.aboutKicker} title={T.aboutTitle} text={T.aboutText} />
+            <div className="aboutGrid">
+              {AboutItems.map(([Icon, Title, Description]) => <article className="aboutCard" key={Title}><span><Icon size={21} /></span><h3>{Title}</h3><p>{Description}</p></article>)}
+            </div>
+          </div>
+        </section>
+
+        <section className="statsSection">
+          <div className="container">
+            <SectionHeading kicker={T.statsKicker} title={T.statsTitle} />
+            <div className="statsGrid">{Config.stats.map(Stat => <div className="statCard" key={Stat.value + Text(Stat.label, Language)}><b>{Stat.value}</b><span>{Text(Stat.label, Language)}</span></div>)}</div>
+          </div>
+        </section>
+
+        <section id="process" className="processSection">
+          <div className="container">
+            <SectionHeading kicker={T.processKicker} title={T.processTitle} text={T.processText} />
+            <div className="processGrid">{[[T.step1Title, T.step1Text], [T.step2Title, T.step2Text], [T.step3Title, T.step3Text], [T.step4Title, T.step4Text]].map((Step, StepIndex) => <div className="processCard" key={Step[0]}><span>{String(StepIndex + 1).padStart(2, '0')}</span><h3>{Step[0]}</h3><p>{Step[1]}</p></div>)}</div>
+          </div>
+        </section>
+
+        <section className="faqSection" id="faq">
+          <div className="container faqGrid">
+            <div><SectionHeading kicker={T.faqKicker} title={T.faqTitle} text={T.faqText} /></div>
+            <div className="faqList">{Config.faq.map((FaqItem, FaqIndex) => <FaqRow key={FaqIndex} item={FaqItem} language={Language} />)}</div>
+          </div>
+        </section>
+
+        <section id="contact" className="contactSection">
+          <div className="container">
+            <div className="contactCard">
+              <div><span className="sectionKicker">{T.contactKicker}</span><h2>{T.contactTitle}</h2><p>{T.contactText}</p></div>
+              <div className="contactActions">
+                <button className="button buttonPrimary" onClick={() => SetRequestOpen(true)}>{T.heroSecondary}<ArrowRight size={17} /></button>
+                <a className="button buttonGhost" href={Config.contacts.telegramUrl} target="_blank" rel="noreferrer"><Send size={17} />{Config.contacts.telegram}</a>
+                <a className="button buttonGhost" href={`mailto:${Config.contacts.email}`}><Mail size={17} />{Config.contacts.email}</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer ref={FooterReference}>
+        <div className="container footerInner">
+          <div className="footerBrand"><div className="brand"><span className="brandMark small"><BadgeCheck size={16} /></span><span>{Config.brand.name}</span></div><span>{Text(Config.brand.tagline, Language)}</span></div>
+          <div className="footerLegal"><span>{T.privacy}</span><span>{T.disclaimer}</span></div>
+        </div>
+      </footer>
+
+      {SelectedServiceIds.length > 0 && !RequestOpen && !FooterVisible && <div className="selectionBar"><div><b>{SelectedServiceIds.length}</b><span>{T.requestCount}</span></div><button className="button buttonPrimary" onClick={() => SetRequestOpen(true)}>{T.openRequest}<ArrowRight size={17} /></button></div>}
+
+      <RequestModal open={RequestOpen} onClose={() => SetRequestOpen(false)} config={Config} language={Language} t={T} selectedServiceIds={SelectedServiceIds} setSelectedServiceIds={SetSelectedServiceIds} />
+    </>
+  )
+}
+
+function SectionHeading({ kicker, title, text }) {
+  return <div className="sectionHeading"><span className="sectionKicker">{kicker}</span><h2>{title}</h2>{text && <p>{text}</p>}</div>
+}
+
+function ServiceCard({ service, language, t, selected, onToggle, onOpen }) {
+  const Price = service.price === null ? Text(service.priceLabel, language) : new Intl.NumberFormat(language === 'ru' ? 'ru-RU' : 'en-US').format(service.price) + ' ₽'
+  const OldPrice = service.oldPrice ? new Intl.NumberFormat(language === 'ru' ? 'ru-RU' : 'en-US').format(service.oldPrice) + ' ₽' : null
+  const Features = service.features?.[language] ?? service.features?.en ?? []
+  const PlatformLabel = service.platform === 'multi' ? (language === 'ru' ? 'Несколько платформ' : 'Multi-platform') : service.platform
+  return (
+    <article className={`serviceCard ${service.featured ? 'featured' : ''} ${selected ? 'selected' : ''}`}>
+      <div className="serviceTop"><span className={`platformBadge platform-${service.platform}`}>{PlatformLabel}</span>{service.featured && <span className="popularBadge"><Sparkles size={12} />{t.featured}</span>}</div>
+      <h3>{Text(service.title, language)}</h3>
+      <p>{Text(service.description, language)}</p>
+      <div className="priceRow"><b>{Price}</b>{OldPrice && <span>{OldPrice}</span>}</div>
+      {service.priceNote && <div className="priceNote">{Text(service.priceNote, language)}</div>}
+      <div className="durationRow"><span>{t.duration}</span><b>{Text(service.duration, language)}</b></div>
+      <ul>{Features.map(Feature => <li key={Feature}><Check size={15} />{Feature}</li>)}</ul>
+      <div className="serviceActions"><button className="button buttonPrimary serviceRequestButton" onClick={onOpen}>{t.serviceRequest}<ArrowRight size={17} /></button><button className={`roundButton addServiceButton ${selected ? 'selected' : ''}`} onClick={onToggle} aria-label={selected ? t.selected : t.select}>{selected ? <Check size={18} /> : <Plus size={19} />}</button></div>
+    </article>
+  )
+}
+
+function FaqRow({ item, language }) {
+  const [Open, SetOpen] = useState(false)
+  return <div className={`faqRow ${Open ? 'open' : ''}`}><button onClick={() => SetOpen(!Open)}><span>{Text(item.question, language)}</span><ChevronDown size={20} /></button>{Open && <p>{Text(item.answer, language)}</p>}</div>
+}
+
+function RequestModal({ open, onClose, config, language, t, selectedServiceIds, setSelectedServiceIds }) {
+  const [Name, SetName] = useState('')
+  const [Contact, SetContact] = useState('')
+  const [ClientType, SetClientType] = useState('individual')
+  const [Urgency, SetUrgency] = useState('normal')
+  const [AccountLinks, SetAccountLinks] = useState([''])
+  const [Details, SetDetails] = useState('')
+  const [Status, SetStatus] = useState('idle')
+  const [ErrorMessage, SetErrorMessage] = useState('')
+
+  useEffect(() => {
+    if (!open) {
+      SetStatus('idle')
+      SetErrorMessage('')
+    }
+  }, [open])
+
+  useEffect(() => {
+    if (!open) return undefined
+    const HandleKeyDown = Event => {
+      if (Event.key === 'Escape') onClose()
+    }
+    window.addEventListener('keydown', HandleKeyDown)
+    return () => window.removeEventListener('keydown', HandleKeyDown)
+  }, [open, onClose])
+
+  if (!open) return null
+
+  const SelectedServices = config.services.filter(Service => selectedServiceIds.includes(Service.id))
+  const ToggleService = ServiceId => setSelectedServiceIds(CurrentIds => CurrentIds.includes(ServiceId) ? CurrentIds.filter(CurrentId => CurrentId !== ServiceId) : [...CurrentIds, ServiceId])
+
+  const SubmitRequest = async Event => {
+    Event.preventDefault()
+    if (selectedServiceIds.length === 0) {
+      SetStatus('error')
+      SetErrorMessage(t.emptyServices)
+      return
+    }
+
+    SetStatus('loading')
+    SetErrorMessage('')
+
+    try {
+      const Response = await fetch('/api/requests', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: Name.trim(),
+          contact: Contact.trim(),
+          language,
+          clientType: t[ClientType],
+          urgency: t[Urgency],
+          serviceIds: selectedServiceIds,
+          accountLinks: AccountLinks.map(AccountLink => AccountLink.trim()).filter(Boolean),
+          details: Details.trim()
+        })
+      })
+      const ResponseText = await Response.text()
+      let Result = null
+
+      if (ResponseText) {
+        try {
+          Result = JSON.parse(ResponseText)
+        } catch {
+          Result = null
+        }
+      }
+
+      if (!Response.ok || !Result?.ok) {
+        const ErrorMessage = Result?.error || (Response.status === 503
+          ? 'Telegram bot is not configured'
+          : Response.status === 502
+            ? 'Telegram is temporarily unavailable'
+            : `Server error (${Response.status})`)
+        throw new Error(ErrorMessage)
+      }
+
+      SetStatus('success')
+    } catch (Error) {
+      SetStatus('error')
+      SetErrorMessage(Error.message === 'Failed to fetch'
+        ? 'Request server is unavailable. Start the backend with npm run dev or npm run server.'
+        : Error.message)
+    }
+  }
+
+  return (
+    <div className="modalOverlay" onMouseDown={Event => Event.target === Event.currentTarget && onClose()}>
+      <div className="requestModal" role="dialog" aria-modal="true">
+        <div className="modalHeader"><div><span className="sectionKicker">{t.heroSecondary}</span><h2>{t.requestTitle}</h2><p>{t.requestText}</p></div><button className="iconButton" onClick={onClose}><X size={20} /></button></div>
+        {Status === 'success' ? <div className="resultState"><span className="resultIcon"><Check size={28} /></span><h3>{t.successTitle}</h3><p>{t.successText}</p><button className="button buttonPrimary" onClick={onClose}>{t.close}</button></div> : (
+          <form onSubmit={SubmitRequest} className="requestForm">
+            <div className="formGrid twoColumns"><label><span>{t.name}</span><input required value={Name} onChange={Event => SetName(Event.target.value)} placeholder={t.namePlaceholder} /></label><label><span>{t.contact}</span><input required value={Contact} onChange={Event => SetContact(Event.target.value)} placeholder={t.contactPlaceholder} /></label></div>
+            <div className="formGrid twoColumns"><label><span>{t.clientType}</span><select value={ClientType} onChange={Event => SetClientType(Event.target.value)}><option value="individual">{t.individual}</option><option value="business">{t.business}</option><option value="agency">{t.agency}</option></select></label><label><span>{t.urgency}</span><select value={Urgency} onChange={Event => SetUrgency(Event.target.value)}><option value="normal">{t.normal}</option><option value="urgent">{t.urgent}</option><option value="flexible">{t.flexible}</option></select></label></div>
+            <fieldset className="serviceSelector"><legend>{t.servicesField}</legend><div className="serviceChecklist">{config.services.map(Service => <label key={Service.id} className={selectedServiceIds.includes(Service.id) ? 'checked' : ''}><input type="checkbox" checked={selectedServiceIds.includes(Service.id)} onChange={() => ToggleService(Service.id)} /><span>{Text(Service.title, language)}</span></label>)}</div></fieldset>
+            <div className="formBlock"><label><span>{t.accountLinks}</span>{AccountLinks.map((AccountLink, AccountIndex) => <div className="accountRow" key={AccountIndex}><input value={AccountLink} onChange={Event => SetAccountLinks(CurrentLinks => CurrentLinks.map((CurrentLink, CurrentIndex) => CurrentIndex === AccountIndex ? Event.target.value : CurrentLink))} placeholder={t.accountPlaceholder} />{AccountLinks.length > 1 && <button type="button" className="iconButton smallIcon" onClick={() => SetAccountLinks(CurrentLinks => CurrentLinks.filter((CurrentLink, CurrentIndex) => CurrentIndex !== AccountIndex))}><X size={15} /></button>}</div>)}</label><button type="button" className="textButton" onClick={() => SetAccountLinks(CurrentLinks => [...CurrentLinks, ''])}>+ {t.addAccount}</button></div>
+            <div className="formBlock"><label><span>{t.details}</span><textarea value={Details} onChange={Event => SetDetails(Event.target.value)} placeholder={t.detailsPlaceholder} /></label></div>
+            {SelectedServices.length > 0 && <div className="selectedSummary">{SelectedServices.map(Service => <span key={Service.id}>{Text(Service.title, language)}<button type="button" onClick={() => ToggleService(Service.id)}><X size={12} /></button></span>)}</div>}
+            {Status === 'error' && <div className="errorBox"><b>{t.errorTitle}</b><span>{ErrorMessage}</span></div>}
+            <div className="modalFooter"><span>{t.privacy}</span><button className="button buttonPrimary" type="submit" disabled={Status === 'loading'}>{Status === 'loading' ? t.submitting : t.submit}<Send size={16} /></button></div>
+          </form>
+        )}
+      </div>
+    </div>
+  )
+}
+
+export default App
