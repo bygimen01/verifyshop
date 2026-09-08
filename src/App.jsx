@@ -249,6 +249,61 @@ function App() {
     return () => Observer.disconnect()
   }, [Config])
 
+
+  useEffect(() => {
+    if (!Config) return undefined
+
+    const RevealElements = Array.from(document.querySelectorAll(
+      '.sectionHeading, .serviceCard, .aboutCard, .statCard, .processCard, .faqRow, .contactCard'
+    ))
+
+    RevealElements.forEach((Element, Index) => {
+      Element.classList.add('revealItem')
+      Element.style.setProperty('--RevealDelay', `${Math.min((Index % 8) * 55, 330)}ms`)
+    })
+
+    const RevealObserver = new IntersectionObserver(Entries => {
+      Entries.forEach(Entry => {
+        if (!Entry.isIntersecting) return
+        Entry.target.classList.add('revealVisible')
+        RevealObserver.unobserve(Entry.target)
+      })
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px' })
+
+    RevealElements.forEach(Element => RevealObserver.observe(Element))
+    return () => RevealObserver.disconnect()
+  }, [Config, Filter, Language])
+
+  useEffect(() => {
+    let FrameId = 0
+
+    const UpdatePointer = Event => {
+      if (FrameId) cancelAnimationFrame(FrameId)
+      FrameId = requestAnimationFrame(() => {
+        document.documentElement.style.setProperty('--PointerX', `${Event.clientX}px`)
+        document.documentElement.style.setProperty('--PointerY', `${Event.clientY}px`)
+        document.documentElement.style.setProperty('--PointerMoveX', `${(Event.clientX / window.innerWidth - 0.5) * 28}px`)
+        document.documentElement.style.setProperty('--PointerMoveY', `${(Event.clientY / window.innerHeight - 0.5) * 28}px`)
+      })
+    }
+
+    const UpdateScroll = () => {
+      const Scrollable = document.documentElement.scrollHeight - window.innerHeight
+      const Progress = Scrollable > 0 ? Math.min(window.scrollY / Scrollable, 1) : 0
+      document.documentElement.style.setProperty('--ScrollProgress', `${Progress * 100}%`)
+    }
+
+    window.addEventListener('pointermove', UpdatePointer, { passive: true })
+    window.addEventListener('scroll', UpdateScroll, { passive: true })
+    UpdateScroll()
+
+    return () => {
+      if (FrameId) cancelAnimationFrame(FrameId)
+      window.removeEventListener('pointermove', UpdatePointer)
+      window.removeEventListener('scroll', UpdateScroll)
+    }
+  }, [])
+
   const FilteredServices = useMemo(() => {
     if (!Config) return []
     if (Filter === 'all') return Config.services
@@ -286,6 +341,15 @@ function App() {
 
   return (
     <>
+      <div className="scrollProgress" aria-hidden="true" />
+      <div className="ambientBackground" aria-hidden="true">
+        <span className="ambientOrb ambientOrbOne" />
+        <span className="ambientOrb ambientOrbTwo" />
+        <span className="ambientOrb ambientOrbThree" />
+        <span className="ambientBeam ambientBeamOne" />
+        <span className="ambientBeam ambientBeamTwo" />
+        <span className="ambientNoise" />
+      </div>
       <header className="siteHeader">
         <div className="container headerInner">
           <a className="brand" href="#top">
@@ -334,8 +398,14 @@ function App() {
               </div>
             </div>
             <div className="heroVisual" aria-hidden="true">
-              <div className="visualOrbit orbitOne" />
-              <div className="visualOrbit orbitTwo" />
+              <div className="visualOrbit orbitOne"><i className="orbitNode orbitNodeOne" /><i className="orbitNode orbitNodeTwo" /></div>
+              <div className="visualOrbit orbitTwo"><i className="orbitNode orbitNodeThree" /><i className="orbitNode orbitNodeFour" /></div>
+              <div className="heroParticle heroParticleOne" />
+              <div className="heroParticle heroParticleTwo" />
+              <div className="heroParticle heroParticleThree" />
+              <div className="heroParticle heroParticleFour" />
+              <div className="heroSignal heroSignalOne"><span>LIVE</span><i /></div>
+              <div className="heroSignal heroSignalTwo"><span>99.8%</span><small>success route</small></div>
               <div className="profileCard">
                 <div className="profileTop"><span className="miniDots"><i /><i /><i /></span><span>verified profile</span></div>
                 <div className="profileAvatar"><Instagram size={34} /></div>
