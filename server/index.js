@@ -42,8 +42,10 @@ const FormatServiceLine = ServiceId => {
   if (!Service) return `• ${EscapeHtml(ServiceId)}`
 
   const ServiceName = Service.title?.ru || Service.title?.en || ServiceId
-  const CurrentPrice = FormatPrice(Service.price, Service.currency)
-  const OldPrice = FormatPrice(Service.oldPrice, Service.currency)
+  const CurrentPriceValue = Service.price?.RUB
+  const OldPriceValue = Service.oldPrice?.RUB
+  const CurrentPrice = FormatPrice(CurrentPriceValue, 'RUB')
+  const OldPrice = FormatPrice(OldPriceValue, 'RUB')
   const PriceLabel = Service.priceLabel?.ru || Service.priceLabel?.en || 'По запросу'
 
   if (!CurrentPrice) {
@@ -51,12 +53,12 @@ const FormatServiceLine = ServiceId => {
   Цена: <b>${EscapeHtml(PriceLabel)}</b>`
   }
 
-  if (!OldPrice || Service.oldPrice <= Service.price) {
+  if (!OldPrice || OldPriceValue <= CurrentPriceValue) {
     return `• <b>${EscapeHtml(ServiceName)}</b>
   Актуальная цена: <b>${CurrentPrice}</b>`
   }
 
-  const DiscountPercent = Math.round((1 - Service.price / Service.oldPrice) * 100)
+  const DiscountPercent = Math.round((1 - CurrentPriceValue / OldPriceValue) * 100)
 
   return [
     `• <b>${EscapeHtml(ServiceName)}</b>`,

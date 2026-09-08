@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { ArrowRight, BadgeCheck, Check, ChevronDown, Globe2, Instagram, Mail, Menu, Moon, Plus, Send, ShieldCheck, Sparkles, Sun, X } from 'lucide-react'
+import { ArrowRight, BadgeCheck, Check, ChevronDown, DollarSign, Globe2, Instagram, Mail, Menu, Moon, Plus, Send, ShieldCheck, Sparkles, Sun, X } from 'lucide-react'
 
 const Text = (Value, Language) => Value?.[Language] ?? Value?.en ?? ''
 
@@ -94,7 +94,16 @@ const Translations = {
     emptyServices: 'Select at least one service',
     privacy: 'No payment or card data is collected on this website.',
     disclaimer: 'VeriBlue is an independent service and is not affiliated with Meta Platforms, Instagram, Facebook or X Corp. Platform subscriptions and eligibility are governed by the respective platform terms.',
-    menu: 'Menu'
+    menu: 'Menu',
+    languageLabel: 'Language',
+    currencyLabel: 'Currency',
+    themeLabel: 'Appearance',
+    ruble: 'RUB · ₽',
+    dollar: 'USD · $',
+    lightTheme: 'Light',
+    darkTheme: 'Dark',
+    serviceDetails: 'Details',
+    serviceDetailsClose: 'Hide details'
   },
   ru: {
     navServices: 'Услуги',
@@ -186,7 +195,16 @@ const Translations = {
     emptyServices: 'Выберите хотя бы одну услугу',
     privacy: 'Платёжные данные и данные банковских карт на сайте не собираются.',
     disclaimer: 'VeriBlue является независимым сервисом и не связан с Meta Platforms, Instagram, Facebook или X Corp. Подписки и критерии доступности определяются правилами соответствующих платформ.',
-    menu: 'Меню'
+    menu: 'Меню',
+    languageLabel: 'Язык',
+    currencyLabel: 'Валюта',
+    themeLabel: 'Тема',
+    ruble: 'RUB · ₽',
+    dollar: 'USD · $',
+    lightTheme: 'Светлая',
+    darkTheme: 'Тёмная',
+    serviceDetails: 'Подробнее',
+    serviceDetailsClose: 'Скрыть детали'
   }
 }
 
@@ -194,14 +212,17 @@ function App() {
   const [Config, SetConfig] = useState(null)
   const [Language, SetLanguage] = useState(() => localStorage.getItem('veriblue-language') || 'en')
   const [Theme, SetTheme] = useState(() => localStorage.getItem('veriblue-theme') || 'dark')
+  const [Currency, SetCurrency] = useState(() => localStorage.getItem('veriblue-currency') || 'RUB')
   const [Filter, SetFilter] = useState('all')
   const [SelectedServiceIds, SetSelectedServiceIds] = useState([])
   const [RequestOpen, SetRequestOpen] = useState(false)
   const [MobileOpen, SetMobileOpen] = useState(false)
   const [LanguageOpen, SetLanguageOpen] = useState(false)
+  const [CurrencyOpen, SetCurrencyOpen] = useState(false)
   const [FooterVisible, SetFooterVisible] = useState(false)
   const FooterReference = useRef(null)
   const LanguageReference = useRef(null)
+  const CurrencyReference = useRef(null)
   const T = Translations[Language]
 
   useEffect(() => {
@@ -219,28 +240,48 @@ function App() {
   }, [Language])
 
   useEffect(() => {
+    localStorage.setItem('veriblue-currency', Currency)
+  }, [Currency])
+
+  useEffect(() => {
     const HandlePointerDown = Event => {
       if (LanguageReference.current && !LanguageReference.current.contains(Event.target)) SetLanguageOpen(false)
+      if (CurrencyReference.current && !CurrencyReference.current.contains(Event.target)) SetCurrencyOpen(false)
     }
     document.addEventListener('pointerdown', HandlePointerDown)
     return () => document.removeEventListener('pointerdown', HandlePointerDown)
   }, [])
 
   useEffect(() => {
-    if (!RequestOpen) return undefined
-    const ScrollbarWidth = window.innerWidth - document.documentElement.clientWidth
-    const PreviousOverflow = document.body.style.overflow
-    const PreviousPaddingRight = document.body.style.paddingRight
-    const PreviousOverscroll = document.body.style.overscrollBehavior
-    document.body.style.overflow = 'hidden'
-    document.body.style.overscrollBehavior = 'none'
-    if (ScrollbarWidth > 0) document.body.style.paddingRight = `${ScrollbarWidth}px`
+    if (!RequestOpen && !MobileOpen) return undefined
+
+    const ScrollY = window.scrollY
+    const Html = document.documentElement
+    const Body = document.body
+    const PreviousHtmlOverflow = Html.style.overflow
+    const PreviousBodyOverflow = Body.style.overflow
+    const PreviousBodyPosition = Body.style.position
+    const PreviousBodyTop = Body.style.top
+    const PreviousBodyWidth = Body.style.width
+    const PreviousOverscroll = Body.style.overscrollBehavior
+
+    Html.style.overflow = 'hidden'
+    Body.style.overflow = 'hidden'
+    Body.style.position = 'fixed'
+    Body.style.top = `-${ScrollY}px`
+    Body.style.width = '100%'
+    Body.style.overscrollBehavior = 'none'
+
     return () => {
-      document.body.style.overflow = PreviousOverflow
-      document.body.style.paddingRight = PreviousPaddingRight
-      document.body.style.overscrollBehavior = PreviousOverscroll
+      Html.style.overflow = PreviousHtmlOverflow
+      Body.style.overflow = PreviousBodyOverflow
+      Body.style.position = PreviousBodyPosition
+      Body.style.top = PreviousBodyTop
+      Body.style.width = PreviousBodyWidth
+      Body.style.overscrollBehavior = PreviousOverscroll
+      window.scrollTo(0, ScrollY)
     }
-  }, [RequestOpen])
+  }, [RequestOpen, MobileOpen])
 
   useEffect(() => {
     if (!FooterReference.current) return undefined
@@ -321,6 +362,17 @@ function App() {
     SetRequestOpen(true)
   }
 
+  const ScrollToSection = SectionId => {
+    const Target = document.getElementById(SectionId)
+    if (!Target) return
+    Target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
+  const CloseMenuAndScroll = SectionId => {
+    SetMobileOpen(false)
+    window.setTimeout(() => ScrollToSection(SectionId), 40)
+  }
+
   if (!Config) return <div className="loadingScreen"><div className="loadingMark"><BadgeCheck size={28} /></div></div>
 
   const Filters = [
@@ -352,16 +404,16 @@ function App() {
       </div>
       <header className="siteHeader">
         <div className="container headerInner">
-          <a className="brand" href="#top">
+          <a className="brand" href="#top" onClick={Event => { Event.preventDefault(); ScrollToSection('top') }}>
             <span className="brandMark"><BadgeCheck size={20} /></span>
             <span>{Config.brand.name}</span>
           </a>
           <nav className={`navLinks ${MobileOpen ? 'navLinksOpen' : ''}`}>
-            <a href="#services" onClick={() => SetMobileOpen(false)}>{T.navServices}</a>
-            <a href="#about" onClick={() => SetMobileOpen(false)}>{T.navAbout}</a>
-            <a href="#process" onClick={() => SetMobileOpen(false)}>{T.navProcess}</a>
-            <a href="#faq" onClick={() => SetMobileOpen(false)}>{T.navFaq}</a>
-            <a href="#contact" onClick={() => SetMobileOpen(false)}>{T.navContact}</a>
+            <a href="#services" onClick={Event => { Event.preventDefault(); ScrollToSection('services') }}>{T.navServices}</a>
+            <a href="#about" onClick={Event => { Event.preventDefault(); ScrollToSection('about') }}>{T.navAbout}</a>
+            <a href="#process" onClick={Event => { Event.preventDefault(); ScrollToSection('process') }}>{T.navProcess}</a>
+            <a href="#faq" onClick={Event => { Event.preventDefault(); ScrollToSection('faq') }}>{T.navFaq}</a>
+            <a href="#contact" onClick={Event => { Event.preventDefault(); ScrollToSection('contact') }}>{T.navContact}</a>
           </nav>
           <div className="headerControls">
             <div className="languagePicker" ref={LanguageReference}>
@@ -371,12 +423,39 @@ function App() {
                 <button className={Language === 'ru' ? 'active' : ''} onClick={() => { SetLanguage('ru'); SetLanguageOpen(false) }}><span>RU</span><b>Русский</b>{Language === 'ru' && <Check size={15} />}</button>
               </div>}
             </div>
+            <div className="currencyPicker" ref={CurrencyReference}>
+              <button className={`controlButton currencyButton ${CurrencyOpen ? 'active' : ''}`} onClick={() => { SetCurrencyOpen(!CurrencyOpen); SetLanguageOpen(false) }} aria-haspopup="menu" aria-expanded={CurrencyOpen}><DollarSign size={15} /><span>{Currency}</span><ChevronDown size={14} /></button>
+              {CurrencyOpen && <div className="languageMenu currencyMenu" role="menu">
+                <button className={Currency === 'RUB' ? 'active' : ''} onClick={() => { SetCurrency('RUB'); SetCurrencyOpen(false) }}><span>₽</span><b>{T.ruble}</b>{Currency === 'RUB' && <Check size={15} />}</button>
+                <button className={Currency === 'USD' ? 'active' : ''} onClick={() => { SetCurrency('USD'); SetCurrencyOpen(false) }}><span>$</span><b>{T.dollar}</b>{Currency === 'USD' && <Check size={15} />}</button>
+              </div>}
+            </div>
             <button className="controlButton themeButton" onClick={() => SetTheme(Theme === 'dark' ? 'light' : 'dark')} aria-label="Toggle theme">{Theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}</button>
             <button className="button buttonPrimary headerRequest" onClick={() => SetRequestOpen(true)}>{T.heroSecondary}</button>
             <button className="controlButton menuButton" onClick={() => SetMobileOpen(!MobileOpen)} aria-label={T.menu}>{MobileOpen ? <X size={18} /> : <Menu size={18} />}</button>
           </div>
         </div>
       </header>
+
+      {MobileOpen && <div className="mobileMenuOverlay" role="dialog" aria-modal="true" aria-label={T.menu}>
+        <div className="mobileMenuBackdrop" />
+        <div className="mobileMenuContent">
+          <div className="mobileMenuTop"><div className="brand"><span className="brandMark"><BadgeCheck size={20} /></span><span>{Config.brand.name}</span></div><button className="controlButton mobileMenuClose" onClick={() => SetMobileOpen(false)} aria-label={T.close}><X size={21} /></button></div>
+          <nav className="mobileMenuNav">
+            <a href="#services" onClick={Event => { Event.preventDefault(); CloseMenuAndScroll('services') }}>{T.navServices}<ArrowRight size={21} /></a>
+            <a href="#about" onClick={Event => { Event.preventDefault(); CloseMenuAndScroll('about') }}>{T.navAbout}<ArrowRight size={21} /></a>
+            <a href="#process" onClick={Event => { Event.preventDefault(); CloseMenuAndScroll('process') }}>{T.navProcess}<ArrowRight size={21} /></a>
+            <a href="#faq" onClick={Event => { Event.preventDefault(); CloseMenuAndScroll('faq') }}>{T.navFaq}<ArrowRight size={21} /></a>
+            <a href="#contact" onClick={Event => { Event.preventDefault(); CloseMenuAndScroll('contact') }}>{T.navContact}<ArrowRight size={21} /></a>
+          </nav>
+          <div className="mobileMenuSettings">
+            <div className="mobileSettingGroup"><span>{T.languageLabel}</span><div className="mobileChoiceRow"><button className={Language === 'ru' ? 'active' : ''} onClick={() => SetLanguage('ru')}>RU · Русский</button><button className={Language === 'en' ? 'active' : ''} onClick={() => SetLanguage('en')}>EN · English</button></div></div>
+            <div className="mobileSettingGroup"><span>{T.currencyLabel}</span><div className="mobileChoiceRow"><button className={Currency === 'RUB' ? 'active' : ''} onClick={() => SetCurrency('RUB')}>₽ RUB</button><button className={Currency === 'USD' ? 'active' : ''} onClick={() => SetCurrency('USD')}>$ USD</button></div></div>
+            <div className="mobileSettingGroup"><span>{T.themeLabel}</span><button className="mobileThemeButton" onClick={() => SetTheme(Theme === 'dark' ? 'light' : 'dark')}>{Theme === 'dark' ? <><Sun size={18} />{T.lightTheme}</> : <><Moon size={18} />{T.darkTheme}</>}</button></div>
+          </div>
+          <button className="button buttonPrimary mobileMenuCta" onClick={() => { SetMobileOpen(false); SetRequestOpen(true) }}>{T.heroSecondary}<ArrowRight size={18} /></button>
+        </div>
+      </div>}
 
       <main id="top">
         <section className="heroSection">
@@ -388,7 +467,7 @@ function App() {
               <h1>{T.heroTitleA}<span>{T.heroTitleB}</span></h1>
               <p>{T.heroText}</p>
               <div className="heroActions">
-                <a className="button buttonPrimary buttonLarge" href="#services">{T.heroPrimary}<ArrowRight size={18} /></a>
+                <a className="button buttonPrimary buttonLarge" href="#services" onClick={Event => { Event.preventDefault(); ScrollToSection('services') }}>{T.heroPrimary}<ArrowRight size={18} /></a>
                 <button className="button buttonGhost buttonLarge" onClick={() => SetRequestOpen(true)}>{T.heroSecondary}</button>
               </div>
               <div className="trustStrip">
@@ -405,7 +484,6 @@ function App() {
               <div className="heroParticle heroParticleThree" />
               <div className="heroParticle heroParticleFour" />
               <div className="heroSignal heroSignalOne"><span>LIVE</span><i /></div>
-              <div className="heroSignal heroSignalTwo"><span>99.8%</span><small>success route</small></div>
               <div className="profileCard">
                 <div className="profileTop"><span className="miniDots"><i /><i /><i /></span><span>verified profile</span></div>
                 <div className="profileAvatar"><Instagram size={34} /></div>
@@ -424,7 +502,7 @@ function App() {
             <SectionHeading kicker={T.servicesKicker} title={T.servicesTitle} text={T.servicesText} />
             <div className="filterBar">{Filters.map(([FilterId, Label]) => <button key={FilterId} className={Filter === FilterId ? 'active' : ''} onClick={() => SetFilter(FilterId)}>{Label}</button>)}</div>
             <div className="serviceGrid">
-              {FilteredServices.map(Service => <ServiceCard key={Service.id} service={Service} language={Language} t={T} selected={SelectedServiceIds.includes(Service.id)} onToggle={() => ToggleService(Service.id)} onOpen={() => OpenRequestWithService(Service.id)} />)}
+              {FilteredServices.map(Service => <ServiceCard key={Service.id} service={Service} language={Language} currency={Currency} t={T} selected={SelectedServiceIds.includes(Service.id)} onToggle={() => ToggleService(Service.id)} onOpen={() => OpenRequestWithService(Service.id)} />)}
             </div>
           </div>
         </section>
@@ -491,20 +569,34 @@ function SectionHeading({ kicker, title, text }) {
   return <div className="sectionHeading"><span className="sectionKicker">{kicker}</span><h2>{title}</h2>{text && <p>{text}</p>}</div>
 }
 
-function ServiceCard({ service, language, t, selected, onToggle, onOpen }) {
-  const Price = service.price === null ? Text(service.priceLabel, language) : new Intl.NumberFormat(language === 'ru' ? 'ru-RU' : 'en-US').format(service.price) + ' ₽'
-  const OldPrice = service.oldPrice ? new Intl.NumberFormat(language === 'ru' ? 'ru-RU' : 'en-US').format(service.oldPrice) + ' ₽' : null
+function ServiceCard({ service, language, currency, t, selected, onToggle, onOpen }) {
+  const FormatPrice = PriceMap => {
+    const Value = PriceMap?.[currency]
+    if (Value === null || Value === undefined) return Text(service.priceLabel, language)
+    if (currency === 'USD') return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(Value)
+    return new Intl.NumberFormat(language === 'ru' ? 'ru-RU' : 'en-US').format(Value) + ' ₽'
+  }
+  const Price = FormatPrice(service.price)
+  const OldPrice = service.oldPrice?.[currency] ? FormatPrice(service.oldPrice) : null
   const Features = service.features?.[language] ?? service.features?.en ?? []
   const PlatformLabel = service.platform === 'multi' ? (language === 'ru' ? 'Несколько платформ' : 'Multi-platform') : service.platform
   return (
     <article className={`serviceCard ${service.featured ? 'featured' : ''} ${selected ? 'selected' : ''}`}>
       <div className="serviceTop"><span className={`platformBadge platform-${service.platform}`}>{PlatformLabel}</span>{service.featured && <span className="popularBadge"><Sparkles size={12} />{t.featured}</span>}</div>
       <h3>{Text(service.title, language)}</h3>
-      <p>{Text(service.description, language)}</p>
+      <p className="serviceDescription desktopServiceDetails">{Text(service.description, language)}</p>
       <div className="priceRow"><b>{Price}</b>{OldPrice && <span>{OldPrice}</span>}</div>
-      {service.priceNote && <div className="priceNote">{Text(service.priceNote, language)}</div>}
+      {service.priceNote && <div className="priceNote desktopServiceDetails">{Text(service.priceNote, language)}</div>}
       <div className="durationRow"><span>{t.duration}</span><b>{Text(service.duration, language)}</b></div>
-      <ul>{Features.map(Feature => <li key={Feature}><Check size={15} />{Feature}</li>)}</ul>
+      <ul className="desktopServiceDetails">{Features.map(Feature => <li key={Feature}><Check size={15} />{Feature}</li>)}</ul>
+      <details className="mobileServiceDetails">
+        <summary>{t.serviceDetails}<ChevronDown size={16} /></summary>
+        <div className="mobileServiceDetailsBody">
+          <p>{Text(service.description, language)}</p>
+          {service.priceNote && <div className="priceNote">{Text(service.priceNote, language)}</div>}
+          <ul>{Features.map(Feature => <li key={Feature}><Check size={15} />{Feature}</li>)}</ul>
+        </div>
+      </details>
       <div className="serviceActions"><button className="button buttonPrimary serviceRequestButton" onClick={onOpen}>{t.serviceRequest}<ArrowRight size={17} /></button><button className={`roundButton addServiceButton ${selected ? 'selected' : ''}`} onClick={onToggle} aria-label={selected ? t.selected : t.select}>{selected ? <Check size={18} /> : <Plus size={19} />}</button></div>
     </article>
   )

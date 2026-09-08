@@ -55,9 +55,14 @@
         "en": "Meta Verified assistance for your current personal profile while preserving username, audience and content.",
         "ru": "Помощь с подключением Meta Verified на действующий личный профиль с сохранением username, аудитории и контента."
       },
-      "price": 40000,
-      "oldPrice": 60000,
-      "currency": "RUB",
+      "price": {
+        "RUB": 40000,
+        "USD": 450
+      },
+      "oldPrice": {
+        "RUB": 60000,
+        "USD": 650
+      },
       "priceNote": {
         "en": "Special terms apply with a video review and story mention after completion.",
         "ru": "Специальная цена действует при видеоотзыве и отметке в сторис после выполнения."
@@ -93,8 +98,10 @@
         "en": "Business verification route for an established commercial profile without rebuilding the page from scratch.",
         "ru": "Сценарий бизнес-верификации для действующей коммерческой страницы без создания нового профиля с нуля."
       },
-      "price": null,
-      "currency": "RUB",
+      "price": {
+        "RUB": null,
+        "USD": null
+      },
       "priceLabel": {
         "en": "On request",
         "ru": "По запросу"
@@ -134,8 +141,10 @@
         "en": "Account analysis and a step-by-step route for opening Meta Verified and completing verification independently.",
         "ru": "Анализ аккаунта и пошаговый сценарий для открытия Meta Verified и самостоятельного прохождения верификации."
       },
-      "price": 3900,
-      "currency": "RUB",
+      "price": {
+        "RUB": 3900,
+        "USD": 45
+      },
       "priceNote": {
         "en": "Digital guide with personal recommendations.",
         "ru": "Цифровая инструкция с персональными рекомендациями."
@@ -172,9 +181,14 @@
         "en": "A new Instagram profile created for your identity and prepared with Meta Verified status.",
         "ru": "Создание нового Instagram-профиля на ваши данные с подключением Meta Verified."
       },
-      "price": 8500,
-      "oldPrice": 10000,
-      "currency": "RUB",
+      "price": {
+        "RUB": 8500,
+        "USD": 95
+      },
+      "oldPrice": {
+        "RUB": 10000,
+        "USD": 110
+      },
       "priceNote": {
         "en": "Special terms apply with a video review and story mention after completion.",
         "ru": "Специальная цена действует при видеоотзыве и отметке в сторис после выполнения."
@@ -210,8 +224,10 @@
         "en": "A new Instagram profile created for a company, store or brand and prepared for verified business status.",
         "ru": "Создание нового Instagram-профиля для компании, магазина или бренда с подготовкой к бизнес-верификации."
       },
-      "price": 20000,
-      "currency": "RUB",
+      "price": {
+        "RUB": 20000,
+        "USD": 220
+      },
       "priceNote": {
         "en": "50% prepayment according to the source price terms.",
         "ru": "Предоплата 50% согласно условиям исходного прайса."
@@ -247,9 +263,14 @@
         "en": "A new verified profile built around a pseudonym or digital persona for creative and media projects.",
         "ru": "Создание нового верифицированного профиля под псевдоним или цифровую личность для творческих и медиа-проектов."
       },
-      "price": 12000,
-      "oldPrice": 15000,
-      "currency": "RUB",
+      "price": {
+        "RUB": 12000,
+        "USD": 135
+      },
+      "oldPrice": {
+        "RUB": 15000,
+        "USD": 165
+      },
       "priceNote": {
         "en": "Special terms apply with a video review and story mention after completion.",
         "ru": "Специальная цена действует при видеоотзыве и отметке в сторис после выполнения."
@@ -286,9 +307,14 @@
         "en": "Meta Verified assistance for an existing Facebook profile while preserving the account, audience and published content.",
         "ru": "Помощь с Meta Verified для действующего Facebook-профиля с сохранением аккаунта, аудитории и публикаций."
       },
-      "price": 30000,
-      "oldPrice": 40000,
-      "currency": "RUB",
+      "price": {
+        "RUB": 30000,
+        "USD": 330
+      },
+      "oldPrice": {
+        "RUB": 40000,
+        "USD": 450
+      },
       "priceNote": {
         "en": "Special terms apply with a video review and story mention after completion.",
         "ru": "Специальная цена действует при видеоотзыве и отметке в сторис после выполнения."
@@ -324,9 +350,14 @@
         "en": "A new Facebook profile created for your identity and prepared with Meta Verified status.",
         "ru": "Создание нового Facebook-профиля на ваши данные с подключением Meta Verified."
       },
-      "price": 12000,
-      "oldPrice": 15000,
-      "currency": "RUB",
+      "price": {
+        "RUB": 12000,
+        "USD": 135
+      },
+      "oldPrice": {
+        "RUB": 15000,
+        "USD": 165
+      },
       "priceNote": {
         "en": "Special terms apply with a video review and story mention after completion.",
         "ru": "Специальная цена действует при видеоотзыве и отметке в сторис после выполнения."
@@ -363,8 +394,10 @@
         "en": "X Premium verification assistance for your current account with username, profile name and avatar preserved.",
         "ru": "Подключение X Premium для действующего аккаунта с сохранением username, имени профиля и аватара."
       },
-      "price": 14000,
-      "currency": "RUB",
+      "price": {
+        "RUB": 14000,
+        "USD": 155
+      },
       "duration": {
         "en": "1–3 days",
         "ru": "1–3 дня"
@@ -396,8 +429,10 @@
         "en": "A new X profile created from scratch and prepared with X Premium verification.",
         "ru": "Создание нового профиля X с нуля и подключением X Premium."
       },
-      "price": 8000,
-      "currency": "RUB",
+      "price": {
+        "RUB": 8000,
+        "USD": 90
+      },
       "duration": {
         "en": "1–2 days",
         "ru": "1–2 дня"
@@ -430,8 +465,10 @@
         "en": "For blocked accounts where the appeal option is still active and the platform has not issued a final decision.",
         "ru": "Для заблокированных аккаунтов, где кнопка апелляции ещё активна и окончательное решение платформы не принято."
       },
-      "price": 25000,
-      "currency": "RUB",
+      "price": {
+        "RUB": 25000,
+        "USD": 275
+      },
       "duration": {
         "en": "3–7 days",
         "ru": "3–7 дней"
@@ -463,8 +500,10 @@
         "en": "For permanently disabled accounts where the standard appeal has already been rejected or is no longer available.",
         "ru": "Для окончательно отключённых аккаунтов, где стандартная апелляция уже отклонена или больше недоступна."
       },
-      "price": null,
-      "currency": "RUB",
+      "price": {
+        "RUB": null,
+        "USD": null
+      },
       "priceLabel": {
         "en": "On request",
         "ru": "По запросу"
@@ -504,8 +543,10 @@
         "en": "Case support for impersonation, fraud, phishing, defamation, threats, harassment, doxxing or unauthorized use of a brand and content.",
         "ru": "Сопровождение кейсов с имперсонацией, мошенничеством, фишингом, клеветой, угрозами, травлей, доксингом и незаконным использованием бренда или контента."
       },
-      "price": null,
-      "currency": "RUB",
+      "price": {
+        "RUB": null,
+        "USD": null
+      },
       "priceLabel": {
         "en": "On request",
         "ru": "По запросу"
