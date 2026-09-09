@@ -1,4 +1,4 @@
-# VeriBlue React
+# Verify24 React
 
 React + Vite frontend with an Express backend that sends structured requests to a Telegram bot.
 

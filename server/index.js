@@ -72,7 +72,7 @@ const BuildTelegramMessage = RequestData => {
   const ServiceLines = RequestData.serviceIds.map(FormatServiceLine)
   const AccountLinks = Array.isArray(RequestData.accountLinks) ? RequestData.accountLinks : []
   const Lines = [
-    '<b>Новая заявка VeriBlue</b>',
+    `<b>Новая заявка ${EscapeHtml(PublicConfig.brand?.name || 'Website')}</b>`,
     '',
     `<b>Имя:</b> ${EscapeHtml(RequestData.name)}`,
     `<b>Контакт:</b> ${EscapeHtml(RequestData.contact)}`,
@@ -157,5 +157,5 @@ if (fs.existsSync(DistDirectory)) {
 }
 
 App.listen(Port, () => {
-  console.log(`VeriBlue server running on http://localhost:${Port}`)
+  console.log(`${PublicConfig.brand?.name || 'Website'} server running on http://localhost:${Port}`)
 })

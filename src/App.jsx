@@ -2,6 +2,41 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { ArrowRight, BadgeCheck, Check, ChevronDown, DollarSign, Globe2, Instagram, Mail, Menu, Moon, Plus, Send, ShieldCheck, Sparkles, Sun, X } from 'lucide-react'
 
 const Text = (Value, Language) => Value?.[Language] ?? Value?.en ?? ''
+const Interpolate = (Value, Variables = {}) => Object.entries(Variables).reduce(
+  (Result, [Key, Replacement]) => Result.replaceAll(`{${Key}}`, Replacement ?? ''),
+  Value ?? ''
+)
+
+const SetMetaContent = (Selector, Content) => {
+  if (!Content) return
+  const Element = document.querySelector(Selector)
+  if (Element) Element.setAttribute('content', Content)
+}
+
+const SetLinkHref = (Selector, Href) => {
+  if (!Href) return
+  const Element = document.querySelector(Selector)
+  if (Element) Element.setAttribute('href', Href)
+}
+
+const CreateBrandFavicon = Brand => {
+  const Background = Brand?.icon?.background || '#6f63f6'
+  const Foreground = Brand?.icon?.foreground || '#ffffff'
+  const Svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="18" fill="${Background}"/><path d="M32 13.5l5.1 3.1 5.9.6 2.2 5.5 4.4 4-1.4 5.8 1.4 5.8-4.4 4-2.2 5.5-5.9.6-5.1 3.1-5.1-3.1-5.9-.6-2.2-5.5-4.4-4 1.4-5.8-1.4-5.8 4.4-4 2.2-5.5 5.9-.6L32 13.5z" fill="none" stroke="${Foreground}" stroke-width="3.2" stroke-linejoin="round"/><path d="M25.8 32.2l4 4 8.6-9" fill="none" stroke="${Foreground}" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`
+  return `data:image/svg+xml,${encodeURIComponent(Svg)}`
+}
+
+const BrandMark = ({ Brand, size = 20, small = false }) => (
+  <span
+    className={`brandMark${small ? ' small' : ''}`}
+    style={{
+      background: Brand?.icon?.background || '#6f63f6',
+      color: Brand?.icon?.foreground || '#ffffff'
+    }}
+  >
+    <BadgeCheck size={size} />
+  </span>
+)
 
 const Translations = {
   en: {
@@ -93,7 +128,6 @@ const Translations = {
     close: 'Close',
     emptyServices: 'Select at least one service',
     privacy: 'No payment or card data is collected on this website.',
-    disclaimer: 'VeriBlue is an independent service and is not affiliated with Meta Platforms, Instagram, Facebook or X Corp. Platform subscriptions and eligibility are governed by the respective platform terms.',
     menu: 'Menu',
     languageLabel: 'Language',
     currencyLabel: 'Currency',
@@ -194,7 +228,6 @@ const Translations = {
     close: 'Закрыть',
     emptyServices: 'Выберите хотя бы одну услугу',
     privacy: 'Платёжные данные и данные банковских карт на сайте не собираются.',
-    disclaimer: 'VeriBlue является независимым сервисом и не связан с Meta Platforms, Instagram, Facebook или X Corp. Подписки и критерии доступности определяются правилами соответствующих платформ.',
     menu: 'Меню',
     languageLabel: 'Язык',
     currencyLabel: 'Валюта',
@@ -229,6 +262,60 @@ function App() {
     fetch(`${import.meta.env.BASE_URL}config.json`).then(Response => Response.json()).then(SetConfig)
   }, [])
 
+
+  useEffect(() => {
+    if (!Config) return
+
+    const Seo = Config.seo || {}
+    const Brand = Config.brand || {}
+    const TitleSuffix = Text(Seo.titleSuffix, Language) || Text(Brand.tagline, Language)
+    const Title = TitleSuffix ? `${Brand.name} · ${TitleSuffix}` : Brand.name
+    const Description = Text(Seo.description, Language)
+    const Keywords = Text(Seo.keywords, Language)
+    const SiteUrl = Seo.siteUrl || window.location.href.split('#')[0]
+    const TabSuffix = Text(Seo.tabSuffix, Language) || TitleSuffix
+    const BrowserTitle = TabSuffix ? `${Brand.name} · ${TabSuffix}` : Brand.name
+
+    document.title = BrowserTitle
+    SetMetaContent('meta[name="theme-color"]', Brand.icon?.background || '#6f63f6')
+    SetMetaContent('meta[name="description"]', Description)
+    SetMetaContent('meta[name="keywords"]', Array.isArray(Keywords) ? Keywords.join(', ') : Keywords)
+    SetMetaContent('meta[name="robots"]', Seo.robots)
+    SetMetaContent('meta[property="og:title"]', Title)
+    SetMetaContent('meta[property="og:description"]', Description)
+    SetMetaContent('meta[property="og:site_name"]', Brand.name)
+    SetMetaContent('meta[property="og:url"]', SiteUrl)
+    SetMetaContent('meta[name="twitter:title"]', Title)
+    SetMetaContent('meta[name="twitter:description"]', Description)
+    SetLinkHref('link[rel="canonical"]', SiteUrl)
+
+    const Favicon = document.querySelector('link[rel="icon"]')
+    if (Favicon) Favicon.href = CreateBrandFavicon(Brand)
+
+    let StructuredData = document.getElementById('site-structured-data')
+    if (!StructuredData) {
+      StructuredData = document.createElement('script')
+      StructuredData.id = 'site-structured-data'
+      StructuredData.type = 'application/ld+json'
+      document.head.appendChild(StructuredData)
+    }
+    StructuredData.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'ProfessionalService',
+      name: Brand.name,
+      url: SiteUrl,
+      description: Description,
+      email: Config.contacts?.email || undefined,
+      sameAs: [Config.contacts?.telegramUrl].filter(Boolean),
+      areaServed: 'Worldwide',
+      serviceType: [
+        'Social media verification assistance',
+        'Account recovery assistance',
+        'Digital reputation protection'
+      ]
+    })
+  }, [Config, Language])
+
   useEffect(() => {
     document.documentElement.dataset.theme = Theme
     localStorage.setItem('veriblue-theme', Theme)
@@ -252,36 +339,36 @@ function App() {
     return () => document.removeEventListener('pointerdown', HandlePointerDown)
   }, [])
 
-  useEffect(() => {
-    if (!RequestOpen && !MobileOpen) return undefined
+  const OverlayOpen = RequestOpen || MobileOpen
 
-    const ScrollY = window.scrollY
+  useEffect(() => {
+    if (!OverlayOpen) return undefined
+
     const Html = document.documentElement
     const Body = document.body
+    const ScrollbarWidth = window.innerWidth - Html.clientWidth
+
     const PreviousHtmlOverflow = Html.style.overflow
+    const PreviousHtmlOverscroll = Html.style.overscrollBehavior
     const PreviousBodyOverflow = Body.style.overflow
-    const PreviousBodyPosition = Body.style.position
-    const PreviousBodyTop = Body.style.top
-    const PreviousBodyWidth = Body.style.width
-    const PreviousOverscroll = Body.style.overscrollBehavior
+    const PreviousBodyOverscroll = Body.style.overscrollBehavior
+    const PreviousBodyPaddingRight = Body.style.paddingRight
 
     Html.style.overflow = 'hidden'
+    Html.style.overscrollBehavior = 'none'
     Body.style.overflow = 'hidden'
-    Body.style.position = 'fixed'
-    Body.style.top = `-${ScrollY}px`
-    Body.style.width = '100%'
     Body.style.overscrollBehavior = 'none'
+
+    if (ScrollbarWidth > 0) Body.style.paddingRight = `${ScrollbarWidth}px`
 
     return () => {
       Html.style.overflow = PreviousHtmlOverflow
+      Html.style.overscrollBehavior = PreviousHtmlOverscroll
       Body.style.overflow = PreviousBodyOverflow
-      Body.style.position = PreviousBodyPosition
-      Body.style.top = PreviousBodyTop
-      Body.style.width = PreviousBodyWidth
-      Body.style.overscrollBehavior = PreviousOverscroll
-      window.scrollTo(0, ScrollY)
+      Body.style.overscrollBehavior = PreviousBodyOverscroll
+      Body.style.paddingRight = PreviousBodyPaddingRight
     }
-  }, [RequestOpen, MobileOpen])
+  }, [OverlayOpen])
 
   useEffect(() => {
     if (!FooterReference.current) return undefined
@@ -290,6 +377,50 @@ function App() {
     return () => Observer.disconnect()
   }, [Config])
 
+
+
+  useEffect(() => {
+    if (!Config) return undefined
+
+    const AnimatedRegions = Array.from(document.querySelectorAll('main > section, footer'))
+    const IsMobile = window.matchMedia('(max-width: 720px)').matches
+    const RootMargin = IsMobile ? '120px 0px 120px 0px' : '220px 0px 220px 0px'
+
+    const SetRegionState = (Element, IsActive) => {
+      Element.classList.toggle('viewportAnimationPaused', !IsActive)
+      Element.classList.toggle('viewportAnimationActive', IsActive)
+    }
+
+    AnimatedRegions.forEach(Element => {
+      Element.classList.add('viewportAnimationRegion')
+      SetRegionState(Element, false)
+    })
+
+    const RegionObserver = new IntersectionObserver(Entries => {
+      Entries.forEach(Entry => SetRegionState(Entry.target, Entry.isIntersecting))
+    }, {
+      threshold: 0.01,
+      rootMargin: RootMargin
+    })
+
+    AnimatedRegions.forEach(Element => RegionObserver.observe(Element))
+
+    const HandleVisibility = () => {
+      document.documentElement.classList.toggle('documentAnimationPaused', document.hidden)
+    }
+
+    HandleVisibility()
+    document.addEventListener('visibilitychange', HandleVisibility)
+
+    return () => {
+      RegionObserver.disconnect()
+      document.removeEventListener('visibilitychange', HandleVisibility)
+      document.documentElement.classList.remove('documentAnimationPaused')
+      AnimatedRegions.forEach(Element => {
+        Element.classList.remove('viewportAnimationRegion', 'viewportAnimationPaused', 'viewportAnimationActive')
+      })
+    }
+  }, [Config])
 
   useEffect(() => {
     if (!Config) return undefined
@@ -317,8 +448,11 @@ function App() {
 
   useEffect(() => {
     let FrameId = 0
+    let ScrollFrameId = 0
+    const HasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches
 
     const UpdatePointer = Event => {
+      if (!HasFinePointer || document.hidden) return
       if (FrameId) cancelAnimationFrame(FrameId)
       FrameId = requestAnimationFrame(() => {
         document.documentElement.style.setProperty('--PointerX', `${Event.clientX}px`)
@@ -329,18 +463,23 @@ function App() {
     }
 
     const UpdateScroll = () => {
-      const Scrollable = document.documentElement.scrollHeight - window.innerHeight
-      const Progress = Scrollable > 0 ? Math.min(window.scrollY / Scrollable, 1) : 0
-      document.documentElement.style.setProperty('--ScrollProgress', `${Progress * 100}%`)
+      if (ScrollFrameId || document.hidden) return
+      ScrollFrameId = requestAnimationFrame(() => {
+        const Scrollable = document.documentElement.scrollHeight - window.innerHeight
+        const Progress = Scrollable > 0 ? Math.min(window.scrollY / Scrollable, 1) : 0
+        document.documentElement.style.setProperty('--ScrollProgress', `${Progress * 100}%`)
+        ScrollFrameId = 0
+      })
     }
 
-    window.addEventListener('pointermove', UpdatePointer, { passive: true })
+    if (HasFinePointer) window.addEventListener('pointermove', UpdatePointer, { passive: true })
     window.addEventListener('scroll', UpdateScroll, { passive: true })
     UpdateScroll()
 
     return () => {
       if (FrameId) cancelAnimationFrame(FrameId)
-      window.removeEventListener('pointermove', UpdatePointer)
+      if (ScrollFrameId) cancelAnimationFrame(ScrollFrameId)
+      if (HasFinePointer) window.removeEventListener('pointermove', UpdatePointer)
       window.removeEventListener('scroll', UpdateScroll)
     }
   }, [])
@@ -405,7 +544,7 @@ function App() {
       <header className="siteHeader">
         <div className="container headerInner">
           <a className="brand" href="#top" onClick={Event => { Event.preventDefault(); ScrollToSection('top') }}>
-            <span className="brandMark"><BadgeCheck size={20} /></span>
+            <BrandMark Brand={Config.brand} size={20} />
             <span>{Config.brand.name}</span>
           </a>
           <nav className={`navLinks ${MobileOpen ? 'navLinksOpen' : ''}`}>
@@ -440,7 +579,7 @@ function App() {
       {MobileOpen && <div className="mobileMenuOverlay" role="dialog" aria-modal="true" aria-label={T.menu}>
         <div className="mobileMenuBackdrop" />
         <div className="mobileMenuContent">
-          <div className="mobileMenuTop"><div className="brand"><span className="brandMark"><BadgeCheck size={20} /></span><span>{Config.brand.name}</span></div><button className="controlButton mobileMenuClose" onClick={() => SetMobileOpen(false)} aria-label={T.close}><X size={21} /></button></div>
+          <div className="mobileMenuTop"><div className="brand"><BrandMark Brand={Config.brand} size={20} /><span>{Config.brand.name}</span></div><button className="controlButton mobileMenuClose" onClick={() => SetMobileOpen(false)} aria-label={T.close}><X size={21} /></button></div>
           <nav className="mobileMenuNav">
             <a href="#services" onClick={Event => { Event.preventDefault(); CloseMenuAndScroll('services') }}>{T.navServices}<ArrowRight size={21} /></a>
             <a href="#about" onClick={Event => { Event.preventDefault(); CloseMenuAndScroll('about') }}>{T.navAbout}<ArrowRight size={21} /></a>
@@ -553,8 +692,8 @@ function App() {
 
       <footer ref={FooterReference}>
         <div className="container footerInner">
-          <div className="footerBrand"><div className="brand"><span className="brandMark small"><BadgeCheck size={16} /></span><span>{Config.brand.name}</span></div><span>{Text(Config.brand.tagline, Language)}</span></div>
-          <div className="footerLegal"><span>{T.privacy}</span><span>{T.disclaimer}</span></div>
+          <div className="footerBrand"><div className="brand"><BrandMark Brand={Config.brand} size={16} small /><span>{Config.brand.name}</span></div><span>{Text(Config.brand.tagline, Language)}</span></div>
+          <div className="footerLegal"><span>{Text(Config.legal?.privacy, Language) || T.privacy}</span><span>{Interpolate(Text(Config.legal?.disclaimer, Language), { brand: Config.brand.name })}</span></div>
         </div>
       </footer>
 

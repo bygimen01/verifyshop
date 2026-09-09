@@ -1,9 +1,14 @@
 {
   "brand": {
-    "name": "VeriBlue",
+    "name": "Verify24",
     "tagline": {
       "en": "Verification · Recovery · Reputation",
       "ru": "Верификация · Восстановление · Репутация"
+    },
+    "shortName": "Verify24",
+    "icon": {
+      "background": "#6f63f6",
+      "foreground": "#ffffff"
     }
   },
   "contacts": {
@@ -696,5 +701,50 @@
         "ru": "Критерии доступности и финальные решения остаются за платформой. Конкретные коммерческие условия и обязательства по результату должны подтверждаться только после проверки аккаунта."
       }
     }
-  ]
+  ],
+  "seo": {
+    "defaultLanguage": "en",
+    "siteUrl": "https://bygimen01.github.io/verifyshop/",
+    "description": {
+      "en": "Verification assistance for Instagram, Facebook and X, account recovery and digital reputation protection. Clear case review, timing and terms before work begins.",
+      "ru": "Помощь с верификацией Instagram, Facebook и X, восстановлением аккаунтов и защитой цифровой репутации. Оценка кейса, сроки и условия до начала работы."
+    },
+    "keywords": {
+      "en": [
+        "Instagram verification",
+        "Meta Verified assistance",
+        "Facebook verification",
+        "X verification",
+        "account recovery",
+        "digital reputation protection"
+      ],
+      "ru": [
+        "верификация Instagram",
+        "Meta Verified",
+        "верификация Facebook",
+        "верификация X",
+        "восстановление аккаунта",
+        "защита репутации"
+      ]
+    },
+    "tabSuffix": {
+      "en": "Verification · Recovery · Reputation",
+      "ru": "Верификация · Восстановление · Репутация"
+    },
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "titleSuffix": {
+      "en": "Verification, Recovery & Reputation",
+      "ru": "Верификация, восстановление и репутация"
+    }
+  },
+  "legal": {
+    "disclaimer": {
+      "en": "{brand} is an independent service and is not affiliated with Meta Platforms, Instagram, Facebook or X Corp. Platform subscriptions and eligibility are governed by the respective platform terms.",
+      "ru": "{brand} является независимым сервисом и не связан с Meta Platforms, Instagram, Facebook или X Corp. Подписки и критерии доступности определяются правилами соответствующих платформ."
+    },
+    "privacy": {
+      "en": "No payment or card data is collected on this website.",
+      "ru": "Платёжные данные и данные банковских карт на сайте не собираются."
+    }
+  }
 }

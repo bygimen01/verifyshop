@@ -1,0 +1,18 @@
+{
+  "name": "Verify24",
+  "short_name": "Verify24",
+  "description": "Verification assistance for Instagram, Facebook and X, account recovery and digital reputation protection. Clear case review, timing and terms before work begins.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0b1020",
+  "theme_color": "#6f63f6",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

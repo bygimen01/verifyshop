@@ -7,8 +7,9 @@
     "dev": "concurrently \"vite\" \"node server/index.js\"",
     "client": "vite",
     "server": "node server/index.js",
-    "build": "vite build",
-    "start": "node server/index.js"
+    "build": "npm run generate-site-meta && vite build",
+    "start": "node server/index.js",
+    "generate-site-meta": "node scripts/generate-site-meta.mjs"
   },
   "dependencies": {
     "cors": "^2.8.5",

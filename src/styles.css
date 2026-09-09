@@ -3417,3 +3417,46 @@ textarea::placeholder {
     top: 225px !important;
   }
 }
+
+
+/* Viewport animation performance */
+.viewportAnimationPaused,
+.viewportAnimationPaused *,
+.viewportAnimationPaused::before,
+.viewportAnimationPaused::after,
+.viewportAnimationPaused *::before,
+.viewportAnimationPaused *::after {
+  animation-play-state: paused !important;
+}
+
+.documentAnimationPaused *,
+.documentAnimationPaused *::before,
+.documentAnimationPaused *::after {
+  animation-play-state: paused !important;
+}
+
+.servicesSection,
+.aboutSection,
+.statsSection,
+.processSection,
+.faqSection,
+.contactSection {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 900px;
+}
+
+@media (max-width: 720px) {
+  .servicesSection,
+  .aboutSection,
+  .statsSection,
+  .processSection,
+  .faqSection,
+  .contactSection {
+    contain-intrinsic-size: 1px 1200px;
+  }
+
+  .ambientBeam,
+  .ambientNoise {
+    animation-play-state: paused !important;
+  }
+}
