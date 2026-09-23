@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { ArrowRight, BadgeCheck, Check, ChevronDown, DollarSign, Globe2, Instagram, Mail, Menu, Moon, Plus, Send, ShieldCheck, Sparkles, Sun, X } from 'lucide-react'
+import { ArrowRight, BadgeCheck, BarChart3, Check, ChevronDown, DollarSign, FileText, Globe2, Instagram, LockKeyhole, Mail, Menu, Moon, Plus, RefreshCw, Send, ShieldCheck, Sparkles, Sun, Users, X } from 'lucide-react'
 
 const Text = (Value, Language) => Value?.[Language] ?? Value?.en ?? ''
 const Interpolate = (Value, Variables = {}) => Object.entries(Variables).reduce(
@@ -68,7 +68,7 @@ const Translations = {
     featured: 'Popular',
     select: 'Add service',
     selected: 'Added',
-    serviceRequest: 'Start request',
+    serviceRequest: 'Get verified',
     duration: 'Timing',
     requestCount: 'selected',
     openRequest: 'Continue request',
@@ -81,11 +81,20 @@ const Translations = {
     about2Text: 'You receive the expected route, timing and commercial terms before the case moves forward.',
     about3Title: 'Support through completion',
     about3Text: 'The team stays in touch during the process and explains the next steps after the result is received.',
+    about1Note: 'Clear plan and honest assessment',
+    about2Note: 'You always know what you pay for',
+    about3Note: 'Support through the final result',
+    statsTitleA: 'Real results and experience',
+    statsTitleB: 'clients trust.',
+    processNote1: '1–2 minutes',
+    processNote2: 'Usually 1–24 hours',
+    processNote3: 'Transparent, no hidden payments',
+    processNote4: 'Proven by experience',
     statsKicker: 'Experience',
-    statsTitle: 'Cases across verification, recovery and reputation.',
+    statsTitle: 'Real results and experience clients trust.',
     processKicker: 'How it works',
-    processTitle: 'From request to result in four clear steps.',
-    processText: 'The website does not process payments. It collects the information needed for a proper case review and sends it directly to the team.',
+    processTitle: 'From request to result in just 4 simple steps.',
+    processText: 'No complicated actions. You send a request and we handle the rest, with clear terms, safety and support at every stage.',
     step1Title: 'Send the case',
     step1Text: 'Choose services, add account links and describe the task.',
     step2Title: 'Initial review',
@@ -168,32 +177,41 @@ const Translations = {
     featured: 'Популярное',
     select: 'Добавить услугу',
     selected: 'Добавлено',
-    serviceRequest: 'Оформить заявку',
+    serviceRequest: 'Получить верификацию',
     duration: 'Срок',
     requestCount: 'выбрано',
     openRequest: 'Продолжить заявку',
     aboutKicker: 'Почему обращаются к нам',
-    aboutTitle: 'Понятный сценарий до начала работы.',
-    aboutText: 'Мы не применяем один шаблон ко всем аккаунтам. Сначала изучаем профиль и задачу, затем объясняем, что реально можно сделать в конкретной ситуации.',
+    aboutTitle: 'Понятные сценарии до начала работы.',
+    aboutText: 'Показываем, как проходит процесс, что нужно от вас и какой результат вы получите. Без сложных терминов — просто и понятно.',
     about1Title: 'Индивидуальная оценка',
     about1Text: 'Проверяем состояние аккаунта, доступность верификации, историю апелляций и возможные риски до согласования формата работы.',
     about2Title: 'Прозрачные условия',
     about2Text: 'До старта вы знаете предполагаемый маршрут, сроки и коммерческие условия. Без сюрпризов в середине процесса.',
     about3Title: 'Сопровождение до результата',
     about3Text: 'Команда остаётся на связи в процессе и объясняет дальнейшие действия после завершения работы.',
+    about1Note: 'Чёткий план и честный ответ',
+    about2Note: 'Вы всегда знаете, за что платите',
+    about3Note: 'Поддержка до финального результата',
+    statsTitleA: 'Реальные результаты и опыт,',
+    statsTitleB: 'которому доверяют.',
+    processNote1: '1–2 минуты',
+    processNote2: 'Обычно 1–24 часа',
+    processNote3: 'Прозрачно и без скрытых платежей',
+    processNote4: 'Проверено опытом',
     statsKicker: 'Опыт',
-    statsTitle: 'Кейсы по верификации, восстановлению и защите репутации.',
+    statsTitle: 'Реальные результаты и опыт, которому доверяют.',
     processKicker: 'Как проходит работа',
-    processTitle: 'От заявки до результата за четыре понятных этапа.',
-    processText: 'Сайт не принимает оплату. Он собирает данные, необходимые для первичной оценки, и передаёт структурированную заявку напрямую команде.',
+    processTitle: 'От заявки до результата всего 4 простых шага.',
+    processText: 'Никаких сложных действий. Вы оставляете заявку — остальное мы берём на себя. Всё прозрачно, безопасно и с поддержкой на каждом этапе.',
     step1Title: 'Заявка',
-    step1Text: 'Выберите услуги, добавьте ссылки на аккаунты и кратко опишите задачу.',
+    step1Text: 'Оставьте заявку, выберите услугу и кратко опишите вашу задачу.',
     step2Title: 'Первичная оценка',
-    step2Text: 'Проверяем состояние аккаунта, возможный сценарий, сроки и риски.',
+    step2Text: 'Мы проверяем аккаунт, уточняем детали и предлагаем оптимальное решение.',
     step3Title: 'Согласование',
-    step3Text: 'Команда связывается с вами и фиксирует итоговый формат и условия до начала работы.',
-    step4Title: 'Работа и поддержка',
-    step4Text: 'Держим вас в курсе процесса и объясняем дальнейшие шаги после получения результата.',
+    step3Text: 'Вы получаете понятный план, сроки, условия и итоговую стоимость. После подтверждения мы начинаем работу.',
+    step4Title: 'Результат и поддержка',
+    step4Text: 'Вы получаете готовый результат, а мы остаёмся на связи и помогаем при необходимости.',
     faqKicker: 'Частые вопросы',
     faqTitle: 'Что важно знать до начала работы.',
     faqText: 'Короткие ответы о форматах верификации, подписках, восстановлении аккаунтов, безопасности и отправке заявки.',
@@ -525,10 +543,20 @@ function App() {
   ]
 
   const AboutItems = [
-    [ShieldCheck, T.about1Title, T.about1Text],
-    [BadgeCheck, T.about2Title, T.about2Text],
-    [Send, T.about3Title, T.about3Text]
+    [ShieldCheck, T.about1Title, T.about1Text, T.about1Note],
+    [BadgeCheck, T.about2Title, T.about2Text, T.about2Note],
+    [Send, T.about3Title, T.about3Text, T.about3Note]
   ]
+
+  const ProcessItems = [
+    [T.step1Title, T.step1Text, T.processNote1],
+    [T.step2Title, T.step2Text, T.processNote2],
+    [T.step3Title, T.step3Text, T.processNote3],
+    [T.step4Title, T.step4Text, T.processNote4]
+  ]
+
+  const StatIcons = [Users, ShieldCheck, RefreshCw, LockKeyhole]
+  const ProcessIcons = [Send, FileText, ShieldCheck, BarChart3]
 
   return (
     <>
@@ -650,22 +678,22 @@ function App() {
           <div className="container">
             <SectionHeading kicker={T.aboutKicker} title={T.aboutTitle} text={T.aboutText} />
             <div className="aboutGrid">
-              {AboutItems.map(([Icon, Title, Description]) => <article className="aboutCard" key={Title}><span><Icon size={21} /></span><h3>{Title}</h3><p>{Description}</p></article>)}
+              {AboutItems.map(([Icon, Title, Description, Note]) => <article className="aboutCard" key={Title}><span><Icon size={21} /></span><h3>{Title}</h3><p>{Description}</p><div className="aboutNote"><span className="aboutNoteCheck"><Check size={15} /></span>{Note}</div></article>)}
             </div>
           </div>
         </section>
 
         <section className="statsSection">
           <div className="container">
-            <SectionHeading kicker={T.statsKicker} title={T.statsTitle} />
-            <div className="statsGrid">{Config.stats.map(Stat => <div className="statCard" key={Stat.value + Text(Stat.label, Language)}><b>{Stat.value}</b><span>{Text(Stat.label, Language)}</span></div>)}</div>
+            <div className="statsHeading"><span className="sectionKicker">{T.statsKicker}</span><h2>{T.statsTitleA} <span>{T.statsTitleB}</span></h2><div className="statsShield" aria-hidden="true"><ShieldCheck size={92} /></div></div>
+            <div className="statsGrid">{Config.stats.map((Stat, StatIndex) => { const StatIcon = StatIcons[StatIndex]; return <div className="statCard" key={Stat.value + Text(Stat.label, Language)}><span className="statIcon"><StatIcon size={25} /></span><div><b>{Stat.value}</b><span>{Text(Stat.label, Language)}</span></div></div> })}</div>
           </div>
         </section>
 
         <section id="process" className="processSection">
           <div className="container">
             <SectionHeading kicker={T.processKicker} title={T.processTitle} text={T.processText} />
-            <div className="processGrid">{[[T.step1Title, T.step1Text], [T.step2Title, T.step2Text], [T.step3Title, T.step3Text], [T.step4Title, T.step4Text]].map((Step, StepIndex) => <div className="processCard" key={Step[0]}><span>{String(StepIndex + 1).padStart(2, '0')}</span><h3>{Step[0]}</h3><p>{Step[1]}</p></div>)}</div>
+            <div className="processGrid">{ProcessItems.map((Step, StepIndex) => { const ProcessIcon = ProcessIcons[StepIndex]; return <div className="processCard" key={Step[0]}><div className="processCardTop"><span className="processIcon"><ProcessIcon size={25} /></span><span className="processNumber">{String(StepIndex + 1).padStart(2, '0')}</span></div><h3>{Step[0]}</h3><p>{Step[1]}</p><div className="processNote">{Step[2]}</div></div> })}</div>
           </div>
         </section>
 

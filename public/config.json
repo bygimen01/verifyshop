@@ -61,16 +61,12 @@
         "ru": "Помощь с подключением Meta Verified на действующий личный профиль с сохранением username, аудитории и контента."
       },
       "price": {
-        "RUB": 40000,
-        "USD": 450
-      },
-      "oldPrice": {
-        "RUB": 60000,
-        "USD": 650
+        "RUB": null,
+        "USD": null
       },
       "priceNote": {
-        "en": "Special terms apply with a video review and story mention after completion.",
-        "ru": "Специальная цена действует при видеоотзыве и отметке в сторис после выполнения."
+        "ru": "Стоимость рассчитывается индивидуально после оценки аккаунта.",
+        "en": "Pricing is calculated individually after the account review."
       },
       "duration": {
         "en": "15–40 days",
@@ -89,6 +85,10 @@
           "Расширенная поддержка платформы",
           "Защита от имперсонации"
         ]
+      },
+      "priceLabel": {
+        "ru": "Индивидуальный расчёт",
+        "en": "Individual quote"
       }
     },
     {
@@ -108,12 +108,12 @@
         "USD": null
       },
       "priceLabel": {
-        "en": "On request",
-        "ru": "По запросу"
+        "ru": "Индивидуальный расчёт",
+        "en": "Individual quote"
       },
       "priceNote": {
-        "en": "Final price depends on the account and working format.",
-        "ru": "Итоговая стоимость зависит от аккаунта и формата работы."
+        "ru": "Стоимость рассчитывается индивидуально после оценки аккаунта.",
+        "en": "Pricing is calculated individually after the account review."
       },
       "duration": {
         "en": "15–40 days",
@@ -135,52 +135,13 @@
       }
     },
     {
-      "id": "instagram-self-guide",
-      "platform": "instagram",
-      "category": "consulting",
-      "title": {
-        "en": "Instagram · Self-service verification guide",
-        "ru": "Instagram · Самостоятельная верификация"
-      },
-      "description": {
-        "en": "Account analysis and a step-by-step route for opening Meta Verified and completing verification independently.",
-        "ru": "Анализ аккаунта и пошаговый сценарий для открытия Meta Verified и самостоятельного прохождения верификации."
-      },
-      "price": {
-        "RUB": 3900,
-        "USD": 45
-      },
-      "priceNote": {
-        "en": "Digital guide with personal recommendations.",
-        "ru": "Цифровая инструкция с персональными рекомендациями."
-      },
-      "duration": {
-        "en": "Digital format",
-        "ru": "Цифровой формат"
-      },
-      "features": {
-        "en": [
-          "Profile analysis",
-          "Step-by-step instructions",
-          "Personal profile recommendations",
-          "Waitlist opening recommendations"
-        ],
-        "ru": [
-          "Анализ страницы",
-          "Пошаговая инструкция",
-          "Персональные рекомендации",
-          "Рекомендации по выходу из списка ожидания"
-        ]
-      }
-    },
-    {
       "id": "instagram-new-personal",
       "platform": "instagram",
       "category": "verification",
       "featured": true,
       "title": {
-        "en": "Instagram · New personal account",
-        "ru": "Instagram · Новый личный аккаунт"
+        "en": "Instagram · Personal profile",
+        "ru": "Instagram · Персональный профиль"
       },
       "description": {
         "en": "A new Instagram profile created for your identity and prepared with Meta Verified status.",
@@ -222,8 +183,8 @@
       "platform": "instagram",
       "category": "verification",
       "title": {
-        "en": "Instagram · New business profile",
-        "ru": "Instagram · Новый бизнес-профиль"
+        "en": "Instagram · Business profile",
+        "ru": "Instagram · Бизнес-профиль"
       },
       "description": {
         "en": "A new Instagram profile created for a company, store or brand and prepared for verified business status.",
@@ -583,122 +544,92 @@
   "faq": [
     {
       "question": {
-        "en": "Do I need a large audience to get verified?",
-        "ru": "Нужно ли много подписчиков для синей галочки?"
+        "ru": "Нужно ли иметь много подписчиков, чтобы получить синюю галочку?",
+        "en": "Do I need many followers to get a blue check?"
       },
       "answer": {
-        "en": "There is no fixed minimum follower count. Account status, identity information and eligibility under the platform rules matter more than audience size.",
-        "ru": "Фиксированного минимального количества подписчиков нет. Важнее состояние аккаунта, корректность данных и соответствие требованиям платформы."
+        "ru": "Нет. Количество подписчиков не является главным условием для верификации. Получить синюю галочку можно даже на небольшом аккаунте — в том числе с аудиторией менее 100 подписчиков.",
+        "en": "No. Follower count is not the main requirement for verification. A blue check can be obtained even on a small account, including accounts with fewer than 100 followers."
       }
     },
     {
       "question": {
-        "en": "Can I keep my current username, followers and content?",
-        "ru": "Можно сохранить текущий username, подписчиков и контент?"
+        "ru": "Нужно ли оплачивать подписку каждый месяц?",
+        "en": "Do I need to pay a subscription every month?"
       },
       "answer": {
-        "en": "For existing-account formats, that is the goal. The exact route and any temporary profile requirements are confirmed after the account review.",
-        "ru": "Для форматов на действующий аккаунт это основной сценарий. Конкретные требования и возможные временные изменения подтверждаются после проверки профиля."
+        "ru": "Зависит от выбранной услуги и платформы. Некоторые виды верификации работают по подписке и требуют ежемесячной оплаты, другие оформляются без регулярных платежей. Все условия, стоимость и необходимость продления мы сообщаем заранее — до начала работы.",
+        "en": "It depends on the selected service and platform. Some verification formats are subscription-based and require monthly payment, while others do not have recurring fees. We explain all terms, pricing and renewal requirements before work begins."
       }
     },
     {
       "question": {
-        "en": "Is Meta Verified or X Premium paid monthly?",
-        "ru": "Нужно ли оплачивать Meta Verified или X Premium каждый месяц?"
+        "ru": "Нужно ли передавать доступ к аккаунту?",
+        "en": "Do I need to provide access to my account?"
       },
       "answer": {
-        "en": "Yes. These are platform subscription products. The platform subscription fee is separate from the service fee and is governed by the platform terms.",
-        "ru": "Да. Это подписочные продукты самих платформ. Стоимость подписки оплачивается отдельно от услуги и регулируется условиями соответствующей платформы."
+        "ru": "Для первичной оценки доступ и пароль не нужны — достаточно ссылки на аккаунт и описания задачи. Если выбранная услуга требует работы непосредственно с профилем, временный доступ согласовывается отдельно перед началом работы. Все условия и необходимые меры безопасности обсуждаются заранее.",
+        "en": "No access or password is needed for the initial review. An account link and task description are enough. If the selected service requires direct profile work, temporary access is agreed separately before work begins, together with the necessary security measures."
       }
     },
     {
       "question": {
-        "en": "What is the difference between personal and business verification?",
-        "ru": "Чем личная верификация отличается от бизнес-верификации?"
+        "ru": "Чем синяя галочка по подписке отличается от обычной верификации?",
+        "en": "How is subscription verification different from regular verification?"
       },
       "answer": {
-        "en": "Personal verification is linked to an individual identity. Business verification is linked to a company, brand or commercial profile and follows a different eligibility route.",
-        "ru": "Личная верификация привязана к конкретному человеку. Бизнес-верификация относится к компании, бренду или коммерческой странице и проходит по другому сценарию."
+        "ru": "Для посетителей профиля визуальной разницы практически нет — синяя галочка отображается одинаково. Главное отличие заключается в способе получения и условиях: верификация по подписке требует регулярной оплаты и действует, пока подписка активна.",
+        "en": "For profile visitors, there is practically no visual difference: the blue check is displayed the same way. The main difference is how it is obtained and maintained. Subscription verification requires recurring payment and remains active while the subscription is active."
       }
     },
     {
       "question": {
-        "en": "What is the difference between the guide and full-service work?",
-        "ru": "Чем инструкция отличается от работы под ключ?"
+        "ru": "Чем синяя галочка по подписке отличается от галочки известных людей?",
+        "en": "How is a subscription blue check different from the check used by public figures?"
       },
       "answer": {
-        "en": "The guide gives you an account analysis, recommendations and a step-by-step route, while you perform the actions yourself. Full-service work includes direct case support through the agreed process.",
-        "ru": "Инструкция включает анализ, рекомендации и пошаговый сценарий, но действия вы выполняете самостоятельно. При работе под ключ команда сопровождает кейс в рамках согласованного процесса."
+        "ru": "Для посетителей профиля — практически ничем. Визуально галочка выглядит так же, а способ её получения в профиле не отображается. Основное отличие — ежемесячная оплата подписки.",
+        "en": "For profile visitors, there is practically no difference. The check looks the same and the profile does not display how it was obtained. The main difference is the monthly subscription payment."
       }
     },
     {
       "question": {
-        "en": "Can a blocked Instagram account be recovered?",
-        "ru": "Можно ли восстановить заблокированный Instagram-аккаунт?"
+        "ru": "Чем синяя галочка на личном аккаунте отличается от галочки на бизнес-аккаунте?",
+        "en": "How does a blue check on a personal account differ from one on a business account?"
       },
       "answer": {
-        "en": "Sometimes. The route depends on the block type, appeal history, account status and available evidence. A diagnostic review is required before any realistic assessment can be made.",
-        "ru": "Иногда да. Всё зависит от типа блокировки, истории апелляций, состояния аккаунта и доступных доказательств. До оценки результата требуется диагностика."
+        "ru": "Главное отличие — в том, кого подтверждает верификация. На личном аккаунте она подтверждает конкретного человека, а на бизнес-аккаунте — компанию, бренд или организацию.\n\nБизнес-профиль позволяет использовать название бренда и логотип компании. При этом визуально синяя галочка выглядит так же, как и на личном аккаунте.",
+        "en": "The main difference is who the verification confirms. A personal account verifies an individual, while a business account verifies a company, brand or organization.\n\nA business profile can use a brand name and company logo. Visually, the blue check looks the same as on a personal account."
       }
     },
     {
       "question": {
-        "en": "What kinds of harmful accounts can be reviewed for removal?",
-        "ru": "Какие нарушающие аккаунты можно взять на блокировку?"
+        "ru": "Какие аккаунты вы можете взять в работу на блокировку?",
+        "en": "Which accounts can you review for removal?"
       },
       "answer": {
-        "en": "Typical cases include impersonation, fraud, phishing, defamation, threats, harassment, publication of personal data and unauthorized use of a name, brand or copyrighted content. A valid platform-policy basis is required.",
-        "ru": "Типичные случаи: имперсонация, мошенничество, фишинг, клевета, угрозы, травля, публикация персональных данных и незаконное использование имени, бренда или контента. Нужны подтверждаемые основания по правилам платформы."
+        "ru": "Рассматриваем аккаунты, которые нарушают правила платформы и могут наносить вред человеку, бренду или бизнесу. Перед началом работы анализируем ситуацию и определяем, есть ли основания для официального обращения в поддержку платформы. Каждый случай рассматривается индивидуально.",
+        "en": "We review accounts that violate platform rules and may harm a person, brand or business. Before work begins, we analyze the situation and determine whether there are grounds for an official platform support request. Every case is reviewed individually."
       }
     },
     {
       "question": {
-        "en": "Do you need my password to review the case?",
-        "ru": "Нужен ли пароль от аккаунта для первичной оценки?"
+        "ru": "Можно ли восстановить заблокированный Instagram-аккаунт?",
+        "en": "Can a blocked Instagram account be recovered?"
       },
       "answer": {
-        "en": "No password is required for the initial request. Start with the public account link and a description of the situation. Any further access requirements should be discussed separately and only when necessary.",
-        "ru": "Для первичной заявки пароль не нужен. Достаточно ссылки на аккаунт и описания ситуации. Любые дальнейшие вопросы доступа должны обсуждаться отдельно и только при необходимости."
+        "ru": "Да, во многих случаях аккаунт можно восстановить. Всё зависит от причины и типа блокировки, истории предыдущих обращений и текущего состояния профиля. Перед началом работы мы проводим оценку ситуации и определяем возможные варианты восстановления.",
+        "en": "Yes, in many cases recovery is possible. It depends on the reason and type of block, previous appeal history and the profile’s current state. Before work begins, we assess the situation and identify possible recovery routes."
       }
     },
     {
       "question": {
-        "en": "Do you take card payment on the website?",
-        "ru": "Можно оплатить услугу банковской картой на сайте?"
+        "ru": "Чем инструкция отличается от работы под ключ?",
+        "en": "How is the guide different from full-service work?"
       },
       "answer": {
-        "en": "No. The website does not collect payment or card data. It only sends a structured request to the team. Commercial terms are discussed directly after the case review.",
-        "ru": "Нет. Сайт не собирает платёжные данные и данные карты. Он только отправляет структурированную заявку команде. Коммерческие условия обсуждаются напрямую после оценки кейса."
-      }
-    },
-    {
-      "question": {
-        "en": "What happens after I submit a request?",
-        "ru": "Что происходит после отправки заявки?"
-      },
-      "answer": {
-        "en": "The request is delivered to the team in Telegram with the selected services, contact details, account links and case description. The team reviews the information and contacts you directly.",
-        "ru": "Заявка приходит команде в Telegram с выбранными услугами, контактом, ссылками на аккаунты и описанием ситуации. После проверки информации команда связывается с вами напрямую."
-      }
-    },
-    {
-      "question": {
-        "en": "Can I select several services in one request?",
-        "ru": "Можно выбрать несколько услуг в одной заявке?"
-      },
-      "answer": {
-        "en": "Yes. This is useful when several accounts or tasks are connected. You can select multiple services and add more than one account link.",
-        "ru": "Да. Это удобно, когда связаны несколько аккаунтов или задач. Можно выбрать несколько услуг и добавить несколько ссылок на аккаунты."
-      }
-    },
-    {
-      "question": {
-        "en": "Are verification results guaranteed?",
-        "ru": "Можно ли гарантировать результат верификации?"
-      },
-      "answer": {
-        "en": "Platform eligibility and final decisions remain under the control of the platform. The team should confirm the specific commercial terms and any result commitments only after reviewing the account.",
-        "ru": "Критерии доступности и финальные решения остаются за платформой. Конкретные коммерческие условия и обязательства по результату должны подтверждаться только после проверки аккаунта."
+        "ru": "При выборе инструкции вы получаете пошаговый план и рекомендации, а все действия выполняете самостоятельно. При работе под ключ мы берём процесс на себя и сопровождаем вас на всех этапах до получения результата.",
+        "en": "With the guide, you receive a step-by-step plan and recommendations and carry out the actions yourself. With full-service work, we handle the process and support you through every stage until the result is received."
       }
     }
   ],
