@@ -48,93 +48,6 @@
   ],
   "services": [
     {
-      "id": "instagram-existing-personal",
-      "platform": "instagram",
-      "category": "verification",
-      "featured": true,
-      "title": {
-        "en": "Instagram · Existing personal account",
-        "ru": "Instagram · Действующий личный аккаунт"
-      },
-      "description": {
-        "en": "Meta Verified assistance for your current personal profile while preserving username, audience and content.",
-        "ru": "Помощь с подключением Meta Verified на действующий личный профиль с сохранением username, аудитории и контента."
-      },
-      "price": {
-        "RUB": null,
-        "USD": null
-      },
-      "priceNote": {
-        "ru": "Стоимость рассчитывается индивидуально после оценки аккаунта.",
-        "en": "Pricing is calculated individually after the account review."
-      },
-      "duration": {
-        "en": "15–40 days",
-        "ru": "15–40 дней"
-      },
-      "features": {
-        "en": [
-          "Keep your current profile and audience",
-          "Verification in Instagram and connected Threads profile",
-          "Enhanced platform support",
-          "Impersonation protection"
-        ],
-        "ru": [
-          "Сохранение текущего профиля и аудитории",
-          "Верификация Instagram и связанного Threads",
-          "Расширенная поддержка платформы",
-          "Защита от имперсонации"
-        ]
-      },
-      "priceLabel": {
-        "ru": "Индивидуальный расчёт",
-        "en": "Individual quote"
-      }
-    },
-    {
-      "id": "instagram-existing-business",
-      "platform": "instagram",
-      "category": "verification",
-      "title": {
-        "en": "Instagram · Existing business account",
-        "ru": "Instagram · Действующий бизнес-аккаунт"
-      },
-      "description": {
-        "en": "Business verification route for an established commercial profile without rebuilding the page from scratch.",
-        "ru": "Сценарий бизнес-верификации для действующей коммерческой страницы без создания нового профиля с нуля."
-      },
-      "price": {
-        "RUB": null,
-        "USD": null
-      },
-      "priceLabel": {
-        "ru": "Индивидуальный расчёт",
-        "en": "Individual quote"
-      },
-      "priceNote": {
-        "ru": "Стоимость рассчитывается индивидуально после оценки аккаунта.",
-        "en": "Pricing is calculated individually after the account review."
-      },
-      "duration": {
-        "en": "15–40 days",
-        "ru": "15–40 дней"
-      },
-      "features": {
-        "en": [
-          "Keep username, followers and content",
-          "Business verification route",
-          "Enhanced platform support",
-          "Optional work without logging out of the account"
-        ],
-        "ru": [
-          "Сохранение username, подписчиков и контента",
-          "Бизнес-формат верификации",
-          "Расширенная поддержка платформы",
-          "Возможность работы без выхода из аккаунта"
-        ]
-      }
-    },
-    {
       "id": "instagram-new-personal",
       "platform": "instagram",
       "category": "verification",
@@ -257,6 +170,93 @@
           "Галочка в Instagram и Threads",
           "Расширенная поддержка платформы",
           "Гибкое оформление профиля"
+        ]
+      }
+    },
+    {
+      "id": "instagram-existing-personal",
+      "platform": "instagram",
+      "category": "verification",
+      "featured": true,
+      "title": {
+        "en": "Instagram · Existing personal account",
+        "ru": "Instagram · Действующий личный аккаунт"
+      },
+      "description": {
+        "en": "Meta Verified assistance for your current personal profile while preserving username, audience and content.",
+        "ru": "Помощь с подключением Meta Verified на действующий личный профиль с сохранением username, аудитории и контента."
+      },
+      "price": {
+        "RUB": null,
+        "USD": null
+      },
+      "priceNote": {
+        "ru": "Стоимость рассчитывается индивидуально после оценки аккаунта.",
+        "en": "Pricing is calculated individually after the account review."
+      },
+      "duration": {
+        "en": "15–40 days",
+        "ru": "15–40 дней"
+      },
+      "features": {
+        "en": [
+          "Keep your current profile and audience",
+          "Verification in Instagram and connected Threads profile",
+          "Enhanced platform support",
+          "Impersonation protection"
+        ],
+        "ru": [
+          "Сохранение текущего профиля и аудитории",
+          "Верификация Instagram и связанного Threads",
+          "Расширенная поддержка платформы",
+          "Защита от имперсонации"
+        ]
+      },
+      "priceLabel": {
+        "ru": "Индивидуальный расчёт",
+        "en": "Individual quote"
+      }
+    },
+    {
+      "id": "instagram-existing-business",
+      "platform": "instagram",
+      "category": "verification",
+      "title": {
+        "en": "Instagram · Existing business account",
+        "ru": "Instagram · Действующий бизнес-аккаунт"
+      },
+      "description": {
+        "en": "Business verification route for an established commercial profile without rebuilding the page from scratch.",
+        "ru": "Сценарий бизнес-верификации для действующей коммерческой страницы без создания нового профиля с нуля."
+      },
+      "price": {
+        "RUB": null,
+        "USD": null
+      },
+      "priceLabel": {
+        "ru": "Индивидуальный расчёт",
+        "en": "Individual quote"
+      },
+      "priceNote": {
+        "ru": "Стоимость рассчитывается индивидуально после оценки аккаунта.",
+        "en": "Pricing is calculated individually after the account review."
+      },
+      "duration": {
+        "en": "15–40 days",
+        "ru": "15–40 дней"
+      },
+      "features": {
+        "en": [
+          "Keep username, followers and content",
+          "Business verification route",
+          "Enhanced platform support",
+          "Optional work without logging out of the account"
+        ],
+        "ru": [
+          "Сохранение username, подписчиков и контента",
+          "Бизнес-формат верификации",
+          "Расширенная поддержка платформы",
+          "Возможность работы без выхода из аккаунта"
         ]
       }
     },

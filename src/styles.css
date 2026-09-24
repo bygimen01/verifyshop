@@ -3690,7 +3690,6 @@ textarea::placeholder {
 .statCard b {
   font-size: 38px;
   line-height: 1;
-  color: var(--Text);
 }
 
 .statCard span:not(.statIcon) {
@@ -3901,6 +3900,7 @@ textarea::placeholder {
   border-radius: 16px;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .statCard .statIcon svg {
@@ -3933,3 +3933,4 @@ textarea::placeholder {
     min-height: 52px;
   }
 }
+
