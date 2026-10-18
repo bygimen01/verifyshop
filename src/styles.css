@@ -3907,3 +3907,48 @@ textarea::placeholder {
   }
 }
 
+
+
+.requestFormSimple { display:flex; flex-direction:column; min-height:0; }
+.requestFormScroll { min-height:0; overflow-y:auto; overscroll-behavior:contain; padding:8px 3px 14px 0; flex:1 1 auto; scrollbar-width:thin; }
+.requestFormSection { padding:18px 0; border-bottom:1px solid var(--Border); }
+.requestFormSection:last-of-type { border-bottom:0; }
+.requestSectionHeading { display:flex; align-items:center; gap:11px; margin-bottom:14px; }
+.requestSectionHeading h3 { margin:0; font-size:18px; font-weight:750; }
+.requestStepNumber { width:32px; height:32px; flex:0 0 32px; display:flex; justify-content:center; align-items:center; border-radius:10px; color:#91b5ff; background:rgba(89,135,247,.15); font-size:13px; font-weight:800; }
+.requestSelectedCount { margin-left:auto; display:flex; justify-content:center; align-items:center; min-width:29px; height:29px; border-radius:10px; color:#a4bdff; background:rgba(89,135,247,.14); font-weight:700; }
+.requestChosenServices { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+.requestChosenServices > span { display:inline-flex; align-items:center; gap:8px; max-width:100%; padding:9px 10px; border:1px solid var(--BorderStrong); border-radius:11px; background:rgba(100,136,215,.10); font-size:13px; line-height:1.4; }
+.requestChosenServices button { display:flex; align-items:center; justify-content:center; flex:0 0 22px; height:22px; border:0; border-radius:7px; color:inherit; background:rgba(255,255,255,.07); cursor:pointer; }
+.requestChooseButton { display:flex; justify-content:center; align-items:center; gap:9px; width:100%; min-height:48px; border:1px dashed var(--BorderStrong); border-radius:12px; background:rgba(93,135,240,.07); color:var(--Text); font:inherit; font-weight:650; cursor:pointer; }
+.requestChooseButton svg:last-child { margin-left:auto; margin-right:12px; transition:transform .2s; }
+.requestChooseButton svg:first-child { margin-left:12px; }
+.requestChevronOpen { transform:rotate(180deg); }
+.requestServiceSelector { margin-top:12px; }
+.requestServiceSelector legend { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+.requestServiceSelector .serviceChecklist { height:auto !important; max-height:230px; overflow-y:auto; }
+.requestFormSection .formBlock + .formBlock { margin-top:16px !important; }
+.requestOptionalSettings { margin-top:16px; border:1px solid var(--Border); border-radius:12px; }
+.requestOptionalSettings summary { display:flex; align-items:center; justify-content:space-between; padding:13px 14px; cursor:pointer; list-style:none; font-weight:650; font-size:14px; }
+.requestOptionalSettings summary::-webkit-details-marker { display:none; }
+.requestOptionalSettings[open] summary svg { transform:rotate(180deg); }
+.requestOptionalSettings .formGrid { padding:0 12px 14px; }
+.requestSimpleFooter { flex:0 0 auto; margin-top:0 !important; padding:12px 0 0 !important; border-top:1px solid var(--Border) !important; background:var(--PanelSolid) !important; }
+.requestSimpleFooter .button { min-height:52px; }
+@media(max-width:720px) {
+  .requestModal { padding: max(16px,env(safe-area-inset-top)) 16px max(12px,env(safe-area-inset-bottom)) !important; }
+  .requestModal .modalHeader { padding-bottom:12px !important; }
+  .requestModal .modalHeader h2 { font-size:clamp(23px,6vw,29px) !important; line-height:1.15 !important; }
+  .requestModal .modalHeader p { font-size:14px !important; line-height:1.45 !important; margin-top:8px !important; }
+  .requestFormSimple { flex:1 1 auto; overflow:hidden !important; padding:0 !important; }
+  .requestFormScroll { overflow-y:auto !important; padding:0 2px 14px 0; }
+  .requestFormSection { padding:16px 0; }
+  .requestSectionHeading h3 { font-size:16px; }
+  .requestFormSection .formGrid { gap:12px !important; }
+  .requestFormSection label > span { display:block; margin-bottom:7px; }
+  .requestFormSection .formBlock { margin-top:0 !important; }
+  .requestFormSection .formBlock + .formBlock { margin-top:16px !important; }
+  .requestFormSection textarea { min-height:96px !important; }
+  .requestSimpleFooter { position:relative !important; bottom:auto !important; padding:12px 0 4px !important; margin:0 !important; box-shadow:0 -10px 20px rgba(0,0,0,.08); }
+  .requestSimpleFooter .button { min-height:52px !important; height:52px !important; }
+}
