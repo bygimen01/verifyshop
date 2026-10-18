@@ -129,6 +129,11 @@ const Translations = {
     details: 'Case details',
     detailsPlaceholder: 'Describe the current account status, the result you need and anything already attempted.',
     servicesField: 'Services',
+    chooseServices: 'Choose services',
+    selectedServices: 'Selected services',
+    optionalSettings: 'Additional preferences (optional)',
+    contactStep: 'How can we reach you?',
+    requestHint: 'Choose a service and leave your contact. Other details are optional.',
     submit: 'Send request',
     submitting: 'Sending...',
     successTitle: 'Request received',
@@ -235,6 +240,11 @@ const Translations = {
     details: 'Описание ситуации',
     detailsPlaceholder: 'Опишите текущее состояние аккаунта, желаемый результат и что уже пробовали сделать.',
     servicesField: 'Услуги',
+    chooseServices: 'Выбрать услуги',
+    selectedServices: 'Выбранные услуги',
+    optionalSettings: 'Дополнительные настройки (необязательно)',
+    contactStep: 'Как с вами связаться?',
+    requestHint: 'Выберите услугу и оставьте контакт. Остальное можно заполнить по желанию.',
     submit: 'Отправить заявку',
     submitting: 'Отправка...',
     successTitle: 'Заявка получена',
@@ -767,6 +777,7 @@ function RequestModal({ open, onClose, config, language, t, selectedServiceIds, 
   const [Urgency, SetUrgency] = useState('normal')
   const [AccountLinks, SetAccountLinks] = useState([''])
   const [Details, SetDetails] = useState('')
+  const [ServicesExpanded, SetServicesExpanded] = useState(false)
   const [Status, SetStatus] = useState('idle')
   const [ErrorMessage, SetErrorMessage] = useState('')
 
@@ -849,17 +860,28 @@ function RequestModal({ open, onClose, config, language, t, selectedServiceIds, 
   return (
     <div className="modalOverlay" onMouseDown={Event => Event.target === Event.currentTarget && onClose()}>
       <div className="requestModal" role="dialog" aria-modal="true">
-        <div className="modalHeader"><div><span className="sectionKicker">{t.heroSecondary}</span><h2>{t.requestTitle}</h2><p>{t.requestText}</p></div><button className="iconButton" onClick={onClose}><X size={20} /></button></div>
+        <div className="modalHeader"><div><span className="sectionKicker">{t.heroSecondary}</span><h2>{t.requestTitle}</h2><p>{t.requestHint}</p></div><button className="iconButton" aria-label={t.close} onClick={onClose}><X size={20} /></button></div>
         {Status === 'success' ? <div className="resultState"><span className="resultIcon"><Check size={28} /></span><h3>{t.successTitle}</h3><p>{t.successText}</p><button className="button buttonPrimary" onClick={onClose}>{t.close}</button></div> : (
-          <form onSubmit={SubmitRequest} className="requestForm">
-            <div className="formGrid twoColumns"><label><span>{t.name}</span><input required value={Name} onChange={Event => SetName(Event.target.value)} placeholder={t.namePlaceholder} /></label><label><span>{t.contact}</span><input required value={Contact} onChange={Event => SetContact(Event.target.value)} placeholder={t.contactPlaceholder} /></label></div>
-            <div className="formGrid twoColumns"><label><span>{t.clientType}</span><select value={ClientType} onChange={Event => SetClientType(Event.target.value)}><option value="individual">{t.individual}</option><option value="business">{t.business}</option><option value="agency">{t.agency}</option></select></label><label><span>{t.urgency}</span><select value={Urgency} onChange={Event => SetUrgency(Event.target.value)}><option value="normal">{t.normal}</option><option value="urgent">{t.urgent}</option><option value="flexible">{t.flexible}</option></select></label></div>
-            <fieldset className="serviceSelector"><legend>{t.servicesField}</legend><div className="serviceChecklist">{config.services.map(Service => <label key={Service.id} className={selectedServiceIds.includes(Service.id) ? 'checked' : ''}><input type="checkbox" checked={selectedServiceIds.includes(Service.id)} onChange={() => ToggleService(Service.id)} /><span>{Text(Service.title, language)}</span></label>)}</div></fieldset>
-            <div className="formBlock"><label><span>{t.accountLinks}</span>{AccountLinks.map((AccountLink, AccountIndex) => <div className="accountRow" key={AccountIndex}><input value={AccountLink} onChange={Event => SetAccountLinks(CurrentLinks => CurrentLinks.map((CurrentLink, CurrentIndex) => CurrentIndex === AccountIndex ? Event.target.value : CurrentLink))} placeholder={t.accountPlaceholder} />{AccountLinks.length > 1 && <button type="button" className="iconButton smallIcon" onClick={() => SetAccountLinks(CurrentLinks => CurrentLinks.filter((CurrentLink, CurrentIndex) => CurrentIndex !== AccountIndex))}><X size={15} /></button>}</div>)}</label><button type="button" className="textButton" onClick={() => SetAccountLinks(CurrentLinks => [...CurrentLinks, ''])}>+ {t.addAccount}</button></div>
-            <div className="formBlock"><label><span>{t.details}</span><textarea value={Details} onChange={Event => SetDetails(Event.target.value)} placeholder={t.detailsPlaceholder} /></label></div>
-            {SelectedServices.length > 0 && <div className="selectedSummary">{SelectedServices.map(Service => <span key={Service.id}>{Text(Service.title, language)}<button type="button" onClick={() => ToggleService(Service.id)}><X size={12} /></button></span>)}</div>}
-            {Status === 'error' && <div className="errorBox"><b>{t.errorTitle}</b><span>{ErrorMessage}</span></div>}
-            <div className="modalFooter"><span>{t.privacy}</span><button className="button buttonPrimary" type="submit" disabled={Status === 'loading'}>{Status === 'loading' ? t.submitting : t.submit}<Send size={16} /></button></div>
+          <form onSubmit={SubmitRequest} className="requestForm requestFormSimple">
+            <div className="requestFormScroll">
+              <section className="requestFormSection">
+                <div className="requestSectionHeading"><span className="requestStepNumber">01</span><h3>{t.servicesField}</h3><span className="requestSelectedCount">{SelectedServices.length}</span></div>
+                {SelectedServices.length > 0 && <div className="requestChosenServices">{SelectedServices.map(Service => <span key={Service.id}>{Text(Service.title, language)}<button type="button" aria-label={t.close} onClick={() => ToggleService(Service.id)}><X size={14} /></button></span>)}</div>}
+                <button type="button" className="requestChooseButton" aria-expanded={ServicesExpanded} onClick={() => SetServicesExpanded(!ServicesExpanded)}><Plus size={18} />{t.chooseServices}<ChevronDown size={17} className={ServicesExpanded ? 'requestChevronOpen' : ''} /></button>
+                {ServicesExpanded && <fieldset className="serviceSelector requestServiceSelector"><legend>{t.servicesField}</legend><div className="serviceChecklist">{config.services.map(Service => <label key={Service.id} className={selectedServiceIds.includes(Service.id) ? 'checked' : ''}><input type="checkbox" checked={selectedServiceIds.includes(Service.id)} onChange={() => ToggleService(Service.id)} /><span>{Text(Service.title, language)}</span></label>)}</div></fieldset>}
+              </section>
+              <section className="requestFormSection">
+                <div className="requestSectionHeading"><span className="requestStepNumber">02</span><h3>{t.contactStep}</h3></div>
+                <div className="formGrid twoColumns"><label><span>{t.name}</span><input required autoComplete="name" value={Name} onChange={Event => SetName(Event.target.value)} placeholder={t.namePlaceholder} /></label><label><span>{t.contact}</span><input required autoComplete="email" value={Contact} onChange={Event => SetContact(Event.target.value)} placeholder={t.contactPlaceholder} /></label></div>
+              </section>
+              <section className="requestFormSection">
+                <div className="formBlock"><label><span>{t.accountLinks}</span>{AccountLinks.map((AccountLink, AccountIndex) => <div className="accountRow" key={AccountIndex}><input type="url" value={AccountLink} onChange={Event => SetAccountLinks(CurrentLinks => CurrentLinks.map((CurrentLink, CurrentIndex) => CurrentIndex === AccountIndex ? Event.target.value : CurrentLink))} placeholder={t.accountPlaceholder} />{AccountLinks.length > 1 && <button type="button" className="iconButton smallIcon" onClick={() => SetAccountLinks(CurrentLinks => CurrentLinks.filter((CurrentLink, CurrentIndex) => CurrentIndex !== AccountIndex))}><X size={15} /></button>}</div>)}</label><button type="button" className="textButton" onClick={() => SetAccountLinks(CurrentLinks => [...CurrentLinks, ''])}>+ {t.addAccount}</button></div>
+                <div className="formBlock"><label><span>{t.details}</span><textarea value={Details} onChange={Event => SetDetails(Event.target.value)} placeholder={t.detailsPlaceholder} /></label></div>
+                <details className="requestOptionalSettings"><summary>{t.optionalSettings}<ChevronDown size={17} /></summary><div className="formGrid twoColumns"><label><span>{t.clientType}</span><select value={ClientType} onChange={Event => SetClientType(Event.target.value)}><option value="individual">{t.individual}</option><option value="business">{t.business}</option><option value="agency">{t.agency}</option></select></label><label><span>{t.urgency}</span><select value={Urgency} onChange={Event => SetUrgency(Event.target.value)}><option value="normal">{t.normal}</option><option value="urgent">{t.urgent}</option><option value="flexible">{t.flexible}</option></select></label></div></details>
+              </section>
+              {Status === 'error' && <div className="errorBox" role="alert"><b>{t.errorTitle}</b><span>{ErrorMessage}</span></div>}
+            </div>
+            <div className="modalFooter requestSimpleFooter"><span>{t.privacy}</span><button className="button buttonPrimary" type="submit" disabled={Status === 'loading'}>{Status === 'loading' ? t.submitting : t.submit}<Send size={16} /></button></div>
           </form>
         )}
       </div>
