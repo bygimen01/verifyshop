@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { ArrowRight, BadgeCheck, BarChart3, Check, ChevronDown, DollarSign, FileText, Globe2, Instagram, LockKeyhole, Mail, Menu, Moon, Plus, RefreshCw, Send, ShieldCheck, Sparkles, Sun, Users, X } from 'lucide-react'
+import { ArrowRight, BadgeCheck, BarChart3, Check, ChevronDown, DollarSign, FileText, Globe2, Instagram, LockKeyhole, Mail, Menu, Plus, RefreshCw, Send, ShieldCheck, Sparkles, Users, X } from 'lucide-react'
 
 const Text = (Value, Language) => Value?.[Language] ?? Value?.en ?? ''
 const Interpolate = (Value, Variables = {}) => Object.entries(Variables).reduce(
@@ -140,11 +140,8 @@ const Translations = {
     menu: 'Menu',
     languageLabel: 'Language',
     currencyLabel: 'Currency',
-    themeLabel: 'Appearance',
     ruble: 'RUB · ₽',
     dollar: 'USD · $',
-    lightTheme: 'Light',
-    darkTheme: 'Dark',
     serviceDetails: 'Details',
     serviceDetailsClose: 'Hide details'
   },
@@ -249,11 +246,8 @@ const Translations = {
     menu: 'Меню',
     languageLabel: 'Язык',
     currencyLabel: 'Валюта',
-    themeLabel: 'Тема',
     ruble: 'RUB · ₽',
     dollar: 'USD · $',
-    lightTheme: 'Светлая',
-    darkTheme: 'Тёмная',
     serviceDetails: 'Подробнее',
     serviceDetailsClose: 'Скрыть детали'
   }
@@ -262,7 +256,6 @@ const Translations = {
 function App() {
   const [Config, SetConfig] = useState(null)
   const [Language, SetLanguage] = useState(() => localStorage.getItem('veriblue-language') || 'en')
-  const [Theme, SetTheme] = useState(() => localStorage.getItem('veriblue-theme') || 'dark')
   const [Currency, SetCurrency] = useState(() => localStorage.getItem('veriblue-currency') || 'RUB')
   const [Filter, SetFilter] = useState('all')
   const [SelectedServiceIds, SetSelectedServiceIds] = useState([])
@@ -333,11 +326,6 @@ function App() {
       ]
     })
   }, [Config, Language])
-
-  useEffect(() => {
-    document.documentElement.dataset.theme = Theme
-    localStorage.setItem('veriblue-theme', Theme)
-  }, [Theme])
 
   useEffect(() => {
     document.documentElement.lang = Language
@@ -597,7 +585,6 @@ function App() {
                 <button className={Currency === 'USD' ? 'active' : ''} onClick={() => { SetCurrency('USD'); SetCurrencyOpen(false) }}><span>$</span><b>{T.dollar}</b>{Currency === 'USD' && <Check size={15} />}</button>
               </div>}
             </div>
-            <button className="controlButton themeButton" onClick={() => SetTheme(Theme === 'dark' ? 'light' : 'dark')} aria-label="Toggle theme">{Theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}</button>
             <button className="button buttonPrimary headerRequest" onClick={() => SetRequestOpen(true)}>{T.heroSecondary}</button>
             <button className="controlButton menuButton" onClick={() => SetMobileOpen(!MobileOpen)} aria-label={T.menu}>{MobileOpen ? <X size={18} /> : <Menu size={18} />}</button>
           </div>
@@ -618,7 +605,6 @@ function App() {
           <div className="mobileMenuSettings">
             <div className="mobileSettingGroup"><span>{T.languageLabel}</span><div className="mobileChoiceRow"><button className={Language === 'ru' ? 'active' : ''} onClick={() => SetLanguage('ru')}>RU · Русский</button><button className={Language === 'en' ? 'active' : ''} onClick={() => SetLanguage('en')}>EN · English</button></div></div>
             <div className="mobileSettingGroup"><span>{T.currencyLabel}</span><div className="mobileChoiceRow"><button className={Currency === 'RUB' ? 'active' : ''} onClick={() => SetCurrency('RUB')}>₽ RUB</button><button className={Currency === 'USD' ? 'active' : ''} onClick={() => SetCurrency('USD')}>$ USD</button></div></div>
-            <div className="mobileSettingGroup"><span>{T.themeLabel}</span><button className="mobileThemeButton" onClick={() => SetTheme(Theme === 'dark' ? 'light' : 'dark')}>{Theme === 'dark' ? <><Sun size={18} />{T.lightTheme}</> : <><Moon size={18} />{T.darkTheme}</>}</button></div>
           </div>
           <button className="button buttonPrimary mobileMenuCta" onClick={() => { SetMobileOpen(false); SetRequestOpen(true) }}>{T.heroSecondary}<ArrowRight size={18} /></button>
         </div>
